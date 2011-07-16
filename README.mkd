@@ -1,0 +1,9 @@
+dotfiles
+========
+
+
+My dot configuration files. Running
+
+    ./install
+
+to link them to `~/`
