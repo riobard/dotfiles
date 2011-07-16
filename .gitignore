@@ -1,0 +1,16 @@
+# OS X directory info
+.DS_Store
+
+# Vim swap files
+.*.sw?
+
+# Python compiled files
+*.pyc
+*.pyo
+
+
+# Subversion
+.svn
+
+# Sass cache
+.sass-cache

@@ -1,0 +1,23 @@
+startup_message off
+
+# keep # lines in history for copy/scrollback mode
+defscrollback 10000
+
+
+#backtick 1 5 5 uptime
+#hardstatus alwayslastline "%1`"
+
+
+caption always '%{= wK} %= %?%F%{= .k}%? %?%F[%{=b}%: %?%n%?%F*%: %?%t%?%F%{-}]%: %? %= '
+hardstatus alwayslastline '%{= wK}%{= wb}[@%H]%{-} [%-w%{=b .k}%n*%t%{-}%+w]  %= %{= .r}[%l]%{-} %{= .g}[%d/%m %0c]%{-}'
+
+
+# LEAVE MY SCROLL BAR ALONE!!
+#  tell Screen not send the termcap initialisation and deinitialisation strings, at least in things that claim to be X-based terminal emulators
+# Kudo to http://aaroncrane.co.uk/2008/01/unbreaking_screen/
+termcapinfo xterm*|rxvt*|kterm*|Eterm* ti@:te@
+
+# use alternative screen for full screen programs like vim, so when you quit 
+# such a program, you see the command you typed before you enter it, rather 
+# than leaving the garbage-uncollected junk screen of it
+altscreen on

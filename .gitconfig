@@ -1,0 +1,5 @@
+[user]
+	name = Riobard
+	email = me@riobard.com
+[core]
+	excludesfile = /Users/rio/.gitignore

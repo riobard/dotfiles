@@ -1,0 +1,40 @@
+
+# The following path detecting code is copied from <http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in/179231#179231>. It is licensed under GPL 2.0. 
+SCRIPT_PATH="${BASH_SOURCE[0]}"
+if([ -h "${SCRIPT_PATH}" ]) then
+  while([ -h "${SCRIPT_PATH}" ]) do SCRIPT_PATH=`readlink "${SCRIPT_PATH}"`; done
+fi
+pushd . > /dev/null
+cd `dirname ${SCRIPT_PATH}` > /dev/null
+SCRIPT_PATH=`pwd`;
+popd  > /dev/null
+
+
+#echo $SCRIPT_PATH
+
+
+link_file() 
+{
+    if [ -h ~/$1 ]; then
+        if [ "$(readlink ~/$1)" != "$SCRIPT_PATH/$1" ]; then
+            mv ~/$1 ~/$1.old
+            ln -s $SCRIPT_PATH/$1  ~/$1 
+            echo ~/$1 installed.
+        fi
+    elif [ -f ~/$1 ]; then
+        mv ~/$1 ~/$1.old
+        ln -s $SCRIPT_PATH/$1  ~/$1 
+        echo ~/$1 installed.
+    else
+        ln -s $SCRIPT_PATH/$1  ~/$1 
+        echo ~/$1 installed.
+    fi
+}
+
+
+for each in $SCRIPT_PATH/.*; do
+    if [ -f $each ]; then
+        link_file `basename $each` 
+    fi
+done
+
