@@ -118,8 +118,6 @@ export JAVA_OPTS="-Dfile.encoding=utf-8 -Xmx2g"
 
 if [ ! `which -s vimpager` ]; then
     export PAGER=`which vimpager`
-    #alias less=$PAGER
-    #alias vless=$PAGER
     alias vless=$PAGER
 fi
 
