@@ -128,7 +128,17 @@ fi
 if [ ! `which -s brew` ]; then
     BREW=`brew --prefix`
     if [ -f $BREW/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
+        source $BREW/etc/bash_completion
+    fi
+
+    # Use Homebrew version of Python for virtualenvwrapper
+    export VIRTUALENVWRAPPER_PYTHON=$BREW/bin/python
+    if [ -f $BREW/share/python/virtualenvwrapper.sh ]; then
+        source $BREW/share/python/virtualenvwrapper.sh
     fi
 
 fi
+
+
+
+    
