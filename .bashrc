@@ -29,8 +29,11 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 alias .......="cd ../../../../../.."
+alias ........="cd ../../../../../../.."
 alias e="mvim"
+alias g="git add -A"
 alias gg="git add -A && git commit"
+alias ggg="git add -A && git commit && git push"
 alias ipy="ipython"
 alias bpy="bpython"
 alias tree="tree -C"
@@ -102,7 +105,7 @@ export CLICOLOR=1
 #export LSCOLORS=exfxcxdxbxegedabagacad # default
 
 
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin:~/bin/:~/.gem/ruby/1.8/bin:/Users/rio/node_modules/.bin
+export PATH=$PATH:/usr/local/bin:/usr/local/sbin:~/bin/
 export MANPATH=$MANPATH
 export EDITOR=/usr/bin/vim
 
