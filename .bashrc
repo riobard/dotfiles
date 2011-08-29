@@ -30,7 +30,9 @@ alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 alias .......="cd ../../../../../.."
 alias e="mvim"
+alias g="git add -A"
 alias gg="git add -A && git commit"
+alias ggg="git add -A && git commit && git push"
 alias ipy="ipython"
 alias bpy="bpython"
 alias tree="tree -C"
@@ -102,7 +104,7 @@ export CLICOLOR=1
 #export LSCOLORS=exfxcxdxbxegedabagacad # default
 
 
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin:~/bin/:~/.gem/ruby/1.8/bin:/Users/rio/node_modules/.bin
+export PATH=$PATH:~/bin/:/usr/local/sbin:/usr/local/bin:/usr/local/share/python:~/.gem/ruby/1.8/bin:/Users/rio/node_modules/.bin
 export MANPATH=$MANPATH
 export EDITOR=/usr/bin/vim
 
@@ -128,4 +130,11 @@ if [ ! `which -s brew` ]; then
     . `brew --prefix`/etc/bash_completion
     fi
 
+fi
+
+
+
+# Python virtualenv
+if [ -f /usr/local/share/python/virtualenvwrapper.sh ]; then
+    . /usr/local/share/python/virtualenvwrapper.sh
 fi
