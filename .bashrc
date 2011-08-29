@@ -29,6 +29,7 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 alias .......="cd ../../../../../.."
+alias ........="cd ../../../../../../.."
 alias e="mvim"
 alias g="git add -A"
 alias gg="git add -A && git commit"
@@ -104,7 +105,7 @@ export CLICOLOR=1
 #export LSCOLORS=exfxcxdxbxegedabagacad # default
 
 
-export PATH=$PATH:~/bin/:/usr/local/sbin:/usr/local/bin:/usr/local/share/python:~/.gem/ruby/1.8/bin:/Users/rio/node_modules/.bin
+export PATH=$PATH:/usr/local/bin:/usr/local/sbin:~/bin/:/usr/local/share/python
 export MANPATH=$MANPATH
 export EDITOR=/usr/bin/vim
 
@@ -117,8 +118,6 @@ export JAVA_OPTS="-Dfile.encoding=utf-8 -Xmx2g"
 
 if [ ! `which -s vimpager` ]; then
     export PAGER=`which vimpager`
-    #alias less=$PAGER
-    #alias vless=$PAGER
     alias vless=$PAGER
 fi
 
@@ -127,7 +126,13 @@ fi
 if [ ! `which -s brew` ]; then
     BREW=`brew --prefix`
     if [ -f $BREW/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
+        source $BREW/etc/bash_completion
+    fi
+
+    # Use Homebrew version of Python for virtualenvwrapper
+    export VIRTUALENVWRAPPER_PYTHON=$BREW/bin/python
+    if [ -f $BREW/share/python/virtualenvwrapper.sh ]; then
+        source $BREW/share/python/virtualenvwrapper.sh
     fi
 
 fi
