@@ -76,8 +76,8 @@ BOLD=$(tput bold)
 
 
 
-if [ ! `which -s git` ]; then
 
+if [ `which git` ]; then
     parse_git_branch() {
         git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/--(git branch \1)/'
     }
@@ -90,7 +90,6 @@ if [ ! `which -s git` ]; then
     PS1='\n\[$RESET$WHITE\]\n(\[$CYAN\]#\!\[$WHITE\])--(\[$RED\]\D{%T}\[$WHITE\])--(\[$RESET$MAGENTA\]\u\[$RESET$WHITE\]@\[$RESET$GREEN\]\h\[$RESET$WHITE\]:\[$RESET$BOLD$WHITE\]\w\[$RESET$WHITE\])$(parse_git_branch)\n\[$RESET$WHITE\]\$ \[$RESET\]'
 
 else
-
     # Without git branch info 
     PS1='\n\[$RESET$WHITE\]\n(\[$CYAN\]#\!\[$WHITE\])--(\[$RED\]\D{%T}\[$WHITE\])--(\[$RESET$MAGENTA\]\u\[$RESET$WHITE\]@\[$RESET$GREEN\]\h\[$RESET$WHITE\]:\[$RESET$BOLD$WHITE\]\w\[$RESET$WHITE\])\n\[$RESET$WHITE\]\$ \[$RESET\]'
 
@@ -116,14 +115,14 @@ export JAVA_OPTS="-Dfile.encoding=utf-8 -Xmx2g"
 
 
 
-if [ ! `which -s vimpager` ]; then
+if [ ! `which vimpager` ]; then
     export PAGER=`which vimpager`
     alias vless=$PAGER
 fi
 
 
 # Homebrew stuff
-if [ ! `which -s brew` ]; then
+if [ ! `which brew` ]; then
     BREW=`brew --prefix`
     if [ -f $BREW/etc/bash_completion ]; then
         source $BREW/etc/bash_completion
@@ -137,6 +136,3 @@ if [ ! `which -s brew` ]; then
 
 fi
 
-
-
-    
