@@ -115,14 +115,14 @@ export JAVA_OPTS="-Dfile.encoding=utf-8 -Xmx2g"
 
 
 
-if [ ! `which vimpager` ]; then
+if [ `which vimpager` ]; then
     export PAGER=`which vimpager`
     alias vless=$PAGER
 fi
 
 
 # Homebrew stuff
-if [ ! `which brew` ]; then
+if [ `which brew` ]; then
     BREW=`brew --prefix`
     if [ -f $BREW/etc/bash_completion ]; then
         source $BREW/etc/bash_completion
