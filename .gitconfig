@@ -3,3 +3,5 @@
 	email = me@riobard.com
 [core]
 	excludesfile = /Users/rio/.gitignore
+[alias]
+    co = checkout
