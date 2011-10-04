@@ -17,6 +17,11 @@
 #set -o vi
 
 # my alias
+if [ `uname` = 'Linux' ]
+then
+    alias ls="ls --color=auto"
+fi
+
 alias ll="ls -lh"
 alias la="ls -ha"
 alias lla="ls -lha"
