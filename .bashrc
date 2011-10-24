@@ -46,6 +46,15 @@ alias objcc="cc -framework Foundation"
 alias glutc="gcc -O3 -framework GLUT -framework OpenGL -framework Cocoa"
 
 
+
+
+if [ -x "/Applications/MacVim.app/Contents/MacOS/Vim" ]; then
+    # Use the vim from MacVim if available
+    alias v=/Applications/MacVim.app/Contents/MacOS/Vim
+else
+    alias v=vim
+fi
+
 ###############################
 # handy tput commands
 # 
