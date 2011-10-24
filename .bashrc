@@ -44,16 +44,8 @@ alias bpy="bpython"
 alias tree="tree -C"
 alias objcc="cc -framework Foundation"
 alias glutc="gcc -O3 -framework GLUT -framework OpenGL -framework Cocoa"
+alias py="python"
 
-
-
-
-if [ -x "/Applications/MacVim.app/Contents/MacOS/Vim" ]; then
-    # Use the vim from MacVim if available
-    alias v=/Applications/MacVim.app/Contents/MacOS/Vim
-else
-    alias v=vim
-fi
 
 ###############################
 # handy tput commands
@@ -118,7 +110,7 @@ export CLICOLOR=1
 #export LSCOLORS=exfxcxdxbxegedabagacad # default
 
 
-export PATH=$PATH:/usr/local/bin:/usr/local/sbin:~/bin/:/usr/local/share/python
+export PATH=/usr/local/bin:/usr/local/sbin:~/bin/:/usr/local/share/python:$PATH
 export MANPATH=$MANPATH
 export EDITOR=/usr/bin/vim
 
