@@ -110,7 +110,7 @@ export CLICOLOR=1
 #export LSCOLORS=exfxcxdxbxegedabagacad # default
 
 
-export PATH=/usr/local/bin:/usr/local/sbin:~/bin/:/usr/local/share/python:$PATH
+export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:~/bin/:$PATH
 export MANPATH=$MANPATH
 export EDITOR=/usr/bin/vim
 
