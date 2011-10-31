@@ -76,16 +76,17 @@ BLUE=$(tput setaf 4)
 MAGENTA=$(tput setaf 5)
 CYAN=$(tput setaf 6)
 WHITE=$(tput setaf 7)
-RESET=$(tput sgr0)
+
 INVERSE=$(tput rev)
 BOLD=$(tput bold)
+RESET=$(tput sgr0)
 
 
 
 
 if [ `which git` ]; then
-    parse_git_branch() {
-        git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/--(git branch \1)/'
+    git_branch() {
+        git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'
     }
 
     #PROMPT_COMMAND="echo $PWD"
@@ -93,13 +94,10 @@ if [ `which git` ]; then
 
     # change bash prompt
     #PS1='\[\e[1;36m\]\w\[\e[m\]\[\e[1;00m\]\$\[\e[m\] '
-    PS1='\n\[$RESET$WHITE\]\n(\[$CYAN\]#\!\[$WHITE\])--(\[$RED\]\D{%T}\[$WHITE\])--(\[$RESET$MAGENTA\]\u\[$RESET$WHITE\]@\[$RESET$GREEN\]\h\[$RESET$WHITE\]:\[$RESET$BOLD$WHITE\]\w\[$RESET$WHITE\])$(parse_git_branch)\n\[$RESET$WHITE\]\$ \[$RESET\]'
-
+    #PS1='\n\[$RESET$WHITE\]\n(\[$CYAN\]#\!\[$WHITE\])--(\[$RED\]\D{%T}\[$WHITE\])--(\[$RESET$MAGENTA\]\u\[$RESET$WHITE\]@\[$RESET$GREEN\]\h\[$RESET$WHITE\]:\[$RESET$BOLD$WHITE\]\w\[$RESET$WHITE\])$(parse_git_branch)\n\[$RESET$WHITE\]\$ \[$RESET\]'
+    PS1='\n\[$RESET$BOLD$RED\]\u\[$RESET$WHITE\]@\[$RESET$BOLD$GREEN\]\h\[$RESET$WHITE\]:\[$RESET$BOLD$YELLOW\]\w\[$RESET$BOLD$MAGENTA\]$(git_branch)\[$RESET$YELLOW\]\$\[$RESET\] '
 else
-    # Without git branch info 
-    PS1='\n\[$RESET$WHITE\]\n(\[$CYAN\]#\!\[$WHITE\])--(\[$RED\]\D{%T}\[$WHITE\])--(\[$RESET$MAGENTA\]\u\[$RESET$WHITE\]@\[$RESET$GREEN\]\h\[$RESET$WHITE\]:\[$RESET$BOLD$WHITE\]\w\[$RESET$WHITE\])\n\[$RESET$WHITE\]\$ \[$RESET\]'
-
-
+    PS1='\n\[$RESET$BOLD$RED\]\u\[$RESET$WHITE\]@\[$RESET$BOLD$GREEN\]\h\[$RESET$WHITE\]:\[$RESET$BOLD$YELLOW\]\w\[$RESET$YELLOW\]\$\[$RESET\] '
 fi
 
 
