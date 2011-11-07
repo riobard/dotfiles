@@ -42,7 +42,7 @@ link_file()
 }
 
 
-for each in $SCRIPT_PATH/.*; do
+for each in $SCRIPT_PATH/files/.*; do
     if [ -f $each ]; then
         link_file `basename $each` 
     fi
