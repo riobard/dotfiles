@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # The following path detection code is copied from StackOverflow [1]. It is 
 # licensed under GPL 2.0. 
@@ -7,8 +7,10 @@
 
 
 SCRIPT_PATH="${BASH_SOURCE[0]}"
-if([ -h "${SCRIPT_PATH}" ]) then
-  while([ -h "${SCRIPT_PATH}" ]) do SCRIPT_PATH=`readlink "${SCRIPT_PATH}"`; done
+if ([ -h "${SCRIPT_PATH}" ]) then
+  while ([ -h "${SCRIPT_PATH}" ]) do 
+      SCRIPT_PATH=`readlink "${SCRIPT_PATH}"`
+  done
 fi
 pushd . > /dev/null
 cd `dirname ${SCRIPT_PATH}` > /dev/null
