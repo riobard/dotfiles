@@ -19,23 +19,24 @@ popd  > /dev/null
 #echo $SCRIPT_PATH
 
 
+
 link_file() 
 {
     if [ -h ~/$1 ]; then
         # symlink already exists. backup the old symlink and replace it
-        if [ "$(readlink ~/$1)" != "$SCRIPT_PATH/$1" ]; then
+        if [ "$(readlink ~/$1)" != "$SCRIPT_PATH/files/$1" ]; then
             mv ~/$1 ~/$1.old
-            ln -s $SCRIPT_PATH/$1  ~/$1 
+            ln -s $SCRIPT_PATH/files/$1  ~/$1 
             echo ~/$1 installed.
         fi
     elif [ -f ~/$1 ]; then
         # file already exists. backup it and symlink to the new one
         mv ~/$1 ~/$1.old
-        ln -s $SCRIPT_PATH/$1  ~/$1 
+        ln -s $SCRIPT_PATH/files/$1  ~/$1 
         echo ~/$1 installed.
     else
         # file not exists. symlink
-        ln -s $SCRIPT_PATH/$1  ~/$1 
+        ln -s $SCRIPT_PATH/files/$1  ~/$1 
         echo ~/$1 installed.
     fi
 }
