@@ -51,6 +51,7 @@ then
     alias objcc="cc -framework Foundation"
     alias glutc="gcc -O3 -framework GLUT -framework OpenGL -framework Cocoa"
     alias py="python"
+    alias vbox='VBoxManage'
 
 
     ###############################
