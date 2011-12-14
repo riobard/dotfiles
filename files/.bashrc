@@ -115,6 +115,9 @@ then
     #export LSCOLORS=exfxcxdxbxegedabagacad # default
 
 
+    export LANG="en_US.UTF-8"
+    export LANGUAGE="en_US.UTF-8"
+    export LC_ALL="en_US.UTF-8"
     export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:~/bin/:$PATH
     export MANPATH=$MANPATH
     export EDITOR=/usr/bin/vim
