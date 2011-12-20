@@ -22,7 +22,7 @@ popd  > /dev/null
 
 
 
-link_file() 
+link() 
 {
     if [ -h ~/$1 ]; then
         # symlink already exists. backup the old symlink and replace it
@@ -31,13 +31,13 @@ link_file()
             ln -s $SCRIPT_PATH/files/$1  ~/$1 
             echo ~/$1 installed.
         fi
-    elif [ -f ~/$1 ]; then
-        # file already exists. backup it and symlink to the new one
+    elif [ -e ~/$1 ]; then
+        # file/dir already exists. backup it and symlink to the new one
         mv ~/$1 ~/$1.old
         ln -s $SCRIPT_PATH/files/$1  ~/$1 
         echo ~/$1 installed.
     else
-        # file not exists. symlink
+        # file/dir not exists. symlink
         ln -s $SCRIPT_PATH/files/$1  ~/$1 
         echo ~/$1 installed.
     fi
@@ -45,8 +45,8 @@ link_file()
 
 
 for each in $SCRIPT_PATH/files/.*; do
-    if [ -f $each ]; then
-        link_file `basename $each` 
+    if [ -e $each ]; then
+        link `basename $each` 
     fi
 done
 
