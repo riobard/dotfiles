@@ -130,10 +130,10 @@ then
     export EDITOR=/usr/bin/vim
 
 
+    # Java
     export JAVA_OPTS="-Dfile.encoding=utf-8 -Xmx2g"
     # set heap size to max 2g (this is a usual amount of memory
     # freely accessible on Bender without causing too much swaping
-
 
 
     if [ `which vimpager` ]; then
@@ -156,6 +156,9 @@ then
         fi
 
     fi
+
+    # Go lang
+    export GOROOT=/usr/local/Cellar/go/r60.3
 
 
     # Bash shell driver for 'go' (http://code.google.com/p/go-tool/).

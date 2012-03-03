@@ -2,7 +2,7 @@
 	name = Riobard
 	email = me@riobard.com
 [core]
-	excludesfile = /home/rio/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [alias]
     co = checkout
 [difftool "sourcetree"]
