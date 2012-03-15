@@ -2,6 +2,6 @@
 	name = Riobard
 	email = me@riobard.com
 [core]
-	excludesfile = /Users/rio/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [alias]
     co = checkout

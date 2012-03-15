@@ -137,6 +137,7 @@ then
     fi
 
 
+    # Java
     export JAVA_OPTS="-Dfile.encoding=utf-8 -Xmx2g"
     # set heap size to max 2g (this is a usual amount of memory
     # freely accessible on Bender without causing too much swaping
@@ -162,6 +163,9 @@ then
         fi
 
     fi
+
+    # Go lang
+    export GOROOT=/usr/local/Cellar/go/r60.3
 
 
 fi
