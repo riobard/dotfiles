@@ -164,8 +164,4 @@ then
 
     fi
 
-    # Go lang
-    export GOROOT=/usr/local/Cellar/go/r60.3
-
-
 fi
