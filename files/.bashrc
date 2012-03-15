@@ -158,17 +158,17 @@ then
     fi
 
     # Go lang
-    export GOROOT=/usr/local/Cellar/go/r60.3
+    export GOROOT=/usr/local/go
 
 
     # Bash shell driver for 'go' (http://code.google.com/p/go-tool/).
-    function go {
-        export GO_SHELL_SCRIPT=$HOME/.__tmp_go.sh
-        /usr/local/bin/python -m go $*
-        if [ -f $GO_SHELL_SCRIPT ] ; then
-            source $GO_SHELL_SCRIPT
-        fi
-        unset GO_SHELL_SCRIPT
-    }
+    #function go {
+    #    export GO_SHELL_SCRIPT=$HOME/.__tmp_go.sh
+    #    /usr/local/bin/python -m go $*
+    #    if [ -f $GO_SHELL_SCRIPT ] ; then
+    #        source $GO_SHELL_SCRIPT
+    #    fi
+    #    unset GO_SHELL_SCRIPT
+    #}
 
 fi
