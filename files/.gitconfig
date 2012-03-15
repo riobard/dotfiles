@@ -2,12 +2,6 @@
 	name = Riobard
 	email = me@riobard.com
 [core]
-	excludesfile = /home/rio/.gitignore_global
+	excludesfile = /Users/rio/.gitignore_global
 [alias]
     co = checkout
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true

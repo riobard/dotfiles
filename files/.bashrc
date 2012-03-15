@@ -41,7 +41,6 @@ then
     alias ......="cd ../../../../.."
     alias .......="cd ../../../../../.."
     alias ........="cd ../../../../../../.."
-    alias e="mvim"
     alias g="git add -A"
     alias gg="git add -A && git commit"
     alias ggg="git add -A && git commit && git push"
@@ -125,15 +124,22 @@ then
     export LANG="en_US.UTF-8"
     export LANGUAGE="en_US.UTF-8"
     export LC_ALL="en_US.UTF-8"
-    export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:~/bin/:$PATH
+    export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
     export MANPATH=$MANPATH
-    export EDITOR=/usr/bin/vim
+    export EDITOR=/usr/local/bin/vim
+
+
+    if [ `uname` = 'Darwin' ]
+    then
+        export GOROOT=/usr/local/go
+        export GOPATH=~/go
+        export PATH=$GOROOT/bin:$PATH
+    fi
 
 
     export JAVA_OPTS="-Dfile.encoding=utf-8 -Xmx2g"
     # set heap size to max 2g (this is a usual amount of memory
     # freely accessible on Bender without causing too much swaping
-
 
 
     if [ `which vimpager` ]; then
@@ -157,15 +163,5 @@ then
 
     fi
 
-
-    # Bash shell driver for 'go' (http://code.google.com/p/go-tool/).
-    function go {
-        export GO_SHELL_SCRIPT=$HOME/.__tmp_go.sh
-        /usr/local/bin/python -m go $*
-        if [ -f $GO_SHELL_SCRIPT ] ; then
-            source $GO_SHELL_SCRIPT
-        fi
-        unset GO_SHELL_SCRIPT
-    }
 
 fi
