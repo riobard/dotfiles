@@ -15,6 +15,10 @@ then
 
     export JAVA_OPTS="-Dfile.encoding=utf-8 -Xmx2g"
 
+    export GOROOT=/usr/local/go
+    export GOPATH=~/go
+    export PATH=$GOROOT/bin:$PATH
+
     alias ..="cd .."
     alias ...="cd ../.."
     alias ....="cd ../../.."
@@ -105,9 +109,6 @@ then
 
 
     if [ `uname` = 'Darwin' ]; then
-        export GOROOT=/usr/local/go
-        export GOPATH=~/go
-        export PATH=$GOROOT/bin:$PATH
         export EDITOR=/usr/local/bin/vim
 
 
@@ -121,6 +122,7 @@ then
         alias glutc="gcc -O3 -framework GLUT -framework OpenGL -framework Cocoa"
 
     elif [ `uname` = 'Linux' ]; then
+        export EDITOR=/usr/bin/vim
         alias ls="ls --color=auto"
     fi
 
