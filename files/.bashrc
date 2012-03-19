@@ -31,7 +31,7 @@ then
     alias ll="ls -lh"
     alias la="ls -ha"
     alias lla="ls -lha"
-    alias l="ls -CF"
+    alias l="ls -CF --hide=*.pyc"
     alias grep="grep --color=auto"
     alias egrep="egrep --color=auto"
     alias ..="cd .."
