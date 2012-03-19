@@ -1,39 +1,25 @@
 if [ "$PS1" ]
 then
     # .bashrc only applies to interactive shells. Ignore non-interactive shells
-    # like scp are ignored by detecting that they do not have $PS1 set. 
+    # like scp by detecting that they do not have $PS1 set. 
 
 
-    # Login greeting ------------------
-    #if [ "$TERM" = "screen" -a ! "$SHOWED_SCREEN_MESSAGE" = "true" ]; then
-    #    detached_screens=`screen -list | grep Detached`
-    #    if [ ! -z "$detached_screens" ]; then
-    #        echo "+---------------------------------------+"
-    #        echo "| Detached screens are available:       |"
-    #        echo "$detached_screens"
-    #        echo "+---------------------------------------+"
-    #    else
-    #        echo "[ screen is activated ]"
-    #    fi
-    #    export SHOWED_SCREEN_MESSAGE="true"
-    #fi
-
-
-    # use Vi-style keybinding; default is emacs
+    # use Vi-style keybinding; default is Emacs-style
     #set -o vi
 
-    # my alias
-    if [ `uname` = 'Linux' ]
-    then
-        alias ls="ls --color=auto"
-    fi
+    export LANG="en_US.UTF-8"
+    export LANGUAGE="en_US.UTF-8"
+    export LC_ALL="en_US.UTF-8"
 
-    alias ll="ls -lh"
-    alias la="ls -ha"
-    alias lla="ls -lha"
-    alias l="ls -CF --hide=*.pyc"
-    alias grep="grep --color=auto"
-    alias egrep="egrep --color=auto"
+    export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
+
+    export JAVA_OPTS="-Dfile.encoding=utf-8 -Xmx2g"
+
+    export GOROOT=/usr/local/go
+    export GOPATH=~/go
+    export PATH=$GOROOT/bin:$PATH
+
+
     alias ..="cd .."
     alias ...="cd ../.."
     alias ....="cd ../../.."
@@ -41,16 +27,23 @@ then
     alias ......="cd ../../../../.."
     alias .......="cd ../../../../../.."
     alias ........="cd ../../../../../../.."
-    alias e="mvim"
+
+    alias ll="ls -lh"
+    alias la="ls -ha"
+    alias lla="ls -lha"
+
+    alias grep="grep --color=auto"
+    alias egrep="egrep --color=auto"
+
     alias g="git add -A"
     alias gg="git add -A && git commit"
     alias ggg="git add -A && git commit && git push"
+
     alias ipy="ipython"
     alias bpy="bpython"
-    alias tree="tree -C"
-    alias objcc="cc -framework Foundation"
-    alias glutc="gcc -O3 -framework GLUT -framework OpenGL -framework Cocoa"
     alias py="python"
+    alias tree="tree -C"
+
     alias vbox='VBoxManage'
 
 
@@ -115,24 +108,26 @@ then
     fi
 
 
-    # ls color output
-    export CLICOLOR=1
-    #export LSCOLORS=ExFxCxDxBxEgEdAbAgAcAd  # bold
-    #export LSCOLORS=GxFxCxDxBxGgGdAbAgAcAd  # bold
-    #export LSCOLORS=exfxcxdxbxegedabagacad # default
+    if [ `uname` = 'Darwin' ]; then
+        export EDITOR=/usr/local/bin/vim
 
+        # enable `ls` color output
+        export CLICOLOR=1
+        #export LSCOLORS=ExFxCxDxBxEgEdAbAgAcAd  # bold
+        #export LSCOLORS=GxFxCxDxBxGgGdAbAgAcAd  # bold
+        #export LSCOLORS=exfxcxdxbxegedabagacad # default
 
-    export LANG="en_US.UTF-8"
-    export LANGUAGE="en_US.UTF-8"
-    export LC_ALL="en_US.UTF-8"
-    export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:~/bin/:$PATH
-    export MANPATH=$MANPATH
-    export EDITOR=/usr/bin/vim
+        alias objcc="cc -framework Foundation"
+        alias glutc="gcc -O3 -framework GLUT -framework OpenGL -framework Cocoa"
 
+        alias l="ls -CF"
 
-    export JAVA_OPTS="-Dfile.encoding=utf-8 -Xmx2g"
-    # set heap size to max 2g (this is a usual amount of memory
-    # freely accessible on Bender without causing too much swaping
+    elif [ `uname` = 'Linux' ]; then
+        export EDITOR=/usr/bin/vim
+
+        alias ls="ls --color=auto"
+        alias l="ls -CF --hide=*.pyc"
+    fi
 
 
 
@@ -156,16 +151,4 @@ then
         fi
 
     fi
-
-
-    # Bash shell driver for 'go' (http://code.google.com/p/go-tool/).
-    function go {
-        export GO_SHELL_SCRIPT=$HOME/.__tmp_go.sh
-        /usr/local/bin/python -m go $*
-        if [ -f $GO_SHELL_SCRIPT ] ; then
-            source $GO_SHELL_SCRIPT
-        fi
-        unset GO_SHELL_SCRIPT
-    }
-
 fi
