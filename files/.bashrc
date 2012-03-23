@@ -97,14 +97,14 @@ then
         #PS1='\n\[$RESET$WHITE\]\n(\[$CYAN\]#\!\[$WHITE\])--(\[$RED\]\D{%T}\[$WHITE\])--(\[$RESET$MAGENTA\]\u\[$RESET$WHITE\]@\[$RESET$GREEN\]\h\[$RESET$WHITE\]:\[$RESET$BOLD$WHITE\]\w\[$RESET$WHITE\])$(parse_git_branch)\n\[$RESET$WHITE\]\$ \[$RESET\]'
         
         ### Dark background
-        #PS1='\n\[$RESET$BOLD$RED\]\u\[$RESET$WHITE\]@\[$RESET$BOLD$GREEN\]\h\[$RESET$WHITE\]:\[$RESET$BOLD$YELLOW\]\w\[$RESET$BOLD$MAGENTA\]$(git_branch)\[$RESET$YELLOW\]\$\[$RESET\] '
+        PS1='\n\[$RESET$BOLD$RED\]\u\[$RESET$WHITE\]@\[$RESET$BOLD$GREEN\]\h\[$RESET$WHITE\]:\[$RESET$BOLD$YELLOW\]\w\[$RESET$BOLD$MAGENTA\]$(git_branch)\[$RESET$YELLOW\]\$\[$RESET\] '
         ### Light background
-        PS1='\n\[$RESET$RED\]\u\[$RESET$BLACK\]@\[$RESET$GREEN\]\h\[$RESET$BLACK\]:\[$RESET$BLUE\]\w\[$RESET$MAGENTA\]$(git_branch)\[$RESET$YELLOW\]\$\[$RESET\] '
+        #PS1='\n\[$RESET$RED\]\u\[$RESET$BLACK\]@\[$RESET$GREEN\]\h\[$RESET$BLACK\]:\[$RESET$BLUE\]\w\[$RESET$MAGENTA\]$(git_branch)\[$RESET$YELLOW\]\$\[$RESET\] '
     else
         ### Dark background
-        #PS1='\n\[$RESET$BOLD$RED\]\u\[$RESET$WHITE\]@\[$RESET$BOLD$GREEN\]\h\[$RESET$WHITE\]:\[$RESET$BOLD$YELLOW\]\w\[$RESET$YELLOW\]\$\[$RESET\] '
+        PS1='\n\[$RESET$BOLD$RED\]\u\[$RESET$WHITE\]@\[$RESET$BOLD$GREEN\]\h\[$RESET$WHITE\]:\[$RESET$BOLD$YELLOW\]\w\[$RESET$YELLOW\]\$\[$RESET\] '
         ### Light background
-        PS1='\n\[$RESET$RED\]\u\[$RESET$BLACK\]@\[$RESET$GREEN\]\h\[$RESET$BLACK\]:\[$RESET$BLUE\]\w\[$RESET$YELLOW\]\$\[$RESET\] '
+        #PS1='\n\[$RESET$RED\]\u\[$RESET$BLACK\]@\[$RESET$GREEN\]\h\[$RESET$BLACK\]:\[$RESET$BLUE\]\w\[$RESET$YELLOW\]\$\[$RESET\] '
     fi
 
 
