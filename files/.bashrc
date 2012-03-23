@@ -19,6 +19,7 @@ then
     export GOPATH=~/go
     export PATH=$GOROOT/bin:$PATH
 
+
     alias ..="cd .."
     alias ...="cd ../.."
     alias ....="cd ../../.."
@@ -27,7 +28,6 @@ then
     alias .......="cd ../../../../../.."
     alias ........="cd ../../../../../../.."
 
-    alias l="ls -CF"
     alias ll="ls -lh"
     alias la="ls -ha"
     alias lla="ls -lha"
@@ -111,7 +111,6 @@ then
     if [ `uname` = 'Darwin' ]; then
         export EDITOR=/usr/local/bin/vim
 
-
         # enable `ls` color output
         export CLICOLOR=1
         #export LSCOLORS=ExFxCxDxBxEgEdAbAgAcAd  # bold
@@ -121,9 +120,13 @@ then
         alias objcc="cc -framework Foundation"
         alias glutc="gcc -O3 -framework GLUT -framework OpenGL -framework Cocoa"
 
+        alias l="ls -CF"
+
     elif [ `uname` = 'Linux' ]; then
         export EDITOR=/usr/bin/vim
+
         alias ls="ls --color=auto"
+        alias l="ls -CF --hide=*.pyc"
     fi
 
 
