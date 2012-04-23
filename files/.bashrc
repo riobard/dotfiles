@@ -19,14 +19,11 @@ then
     export GOPATH=~/go
     export PATH=$GOROOT/bin:$PATH
 
+    export HOBOXROOT=~/hobox
 
     alias ..="cd .."
     alias ...="cd ../.."
     alias ....="cd ../../.."
-    alias .....="cd ../../../.."
-    alias ......="cd ../../../../.."
-    alias .......="cd ../../../../../.."
-    alias ........="cd ../../../../../../.."
 
     alias ll="ls -lh"
     alias la="ls -ha"
