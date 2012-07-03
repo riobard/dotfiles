@@ -81,7 +81,7 @@ then
 
 
 
-    if [ `which git` ]; then
+    if [ `which git 2>/dev/null` ]; then
         git_branch() {
             git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'
         }
@@ -128,14 +128,14 @@ then
 
 
 
-    if [ `which vimpager` ]; then
+    if [ `which vimpager 2>/dev/null` ]; then
         export PAGER=`which vimpager`
         alias vless=$PAGER
     fi
 
 
     # Homebrew stuff
-    if [ `which brew` ]; then
+    if [ `which brew 2>/dev/null` ]; then
         BREW=`brew --prefix`
         if [ -f $BREW/etc/bash_completion ]; then
             source $BREW/etc/bash_completion
