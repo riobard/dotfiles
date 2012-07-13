@@ -34,7 +34,6 @@ then
     export LANG="en_US.UTF-8"
     export LANGUAGE="en_US.UTF-8"
     export LC_ALL="en_US.UTF-8"
-    export EDITOR=`which vi`
 
     export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
 
@@ -45,6 +44,7 @@ then
     export PATH=$GOROOT/bin:$PATH
 
     export HOBOXROOT=~/hobox
+    export EDITOR=`which vi`
 
     alias ..="cd .."
     alias ...="cd ../.."
@@ -137,12 +137,10 @@ then
         then
             echo -e "\033]50;SetProfile=Rio-light\a"
             export ITERM_PROFILE=Rio-light
-            export TERM_BG=light
         elif [ "$1" = 'dark' ]
         then
             echo -e "\033]50;SetProfile=Rio-dark\a"
             export ITERM_PROFILE=Rio-dark
-            export TERM_BG=dark
         else
             echo "Usage: $FUNCNAME [dark|light]"
         fi
