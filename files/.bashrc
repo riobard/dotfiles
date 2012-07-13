@@ -3,9 +3,8 @@ then
     # .bashrc only applies to interactive shells. Ignore non-interactive shells
     # like scp by detecting that they do not have $PS1 set. 
 
-    if [ `uname` = 'Darwin' ]; then
-        export EDITOR=/usr/local/bin/vim
 
+    if [ `uname` = 'Darwin' ]; then
         # enable `ls` color output
         export CLICOLOR=1
         #export LSCOLORS=ExFxCxDxBxEgEdAbAgAcAd  # bold
@@ -19,12 +18,14 @@ then
         PS_SYM=''
 
     elif [ `uname` = 'Linux' ]; then
-        export EDITOR=/usr/bin/vim
-
         alias ls="ls --color=auto"
         alias l="ls -CF --hide=*.pyc"
 
         PS_SYM='$'
+
+    else
+        PS_SYM='%'
+
     fi
 
     # use Vi-style keybinding; default is Emacs-style
@@ -33,6 +34,7 @@ then
     export LANG="en_US.UTF-8"
     export LANGUAGE="en_US.UTF-8"
     export LC_ALL="en_US.UTF-8"
+    export EDITOR=`which vi`
 
     export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
 
@@ -128,4 +130,22 @@ then
             source $BREW/etc/bash_completion
         fi
     fi
+
+
+    it2bg() {
+        if [ "$1" = 'light' ]
+        then
+            echo -e "\033]50;SetProfile=Rio-light\a"
+            export ITERM_PROFILE=Rio-light
+            export TERM_BG=light
+        elif [ "$1" = 'dark' ]
+        then
+            echo -e "\033]50;SetProfile=Rio-dark\a"
+            export ITERM_PROFILE=Rio-dark
+            export TERM_BG=dark
+        else
+            echo "Usage: $FUNCNAME [dark|light]"
+        fi
+    }
+
 fi
