@@ -1,4 +1,4 @@
-set noloadplugins
+"set noloadplugins
 set nocursorline
 set nocursorcolumn
 

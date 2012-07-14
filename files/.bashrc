@@ -1,37 +1,6 @@
-if [ "$PS1" ]
-then
-    # .bashrc only applies to interactive shells. Ignore non-interactive shells
-    # like scp by detecting that they do not have $PS1 set. 
-
-
-    if [ `uname` = 'Darwin' ]; then
-        # enable `ls` color output
-        export CLICOLOR=1
-        #export LSCOLORS=ExFxCxDxBxEgEdAbAgAcAd  # bold
-        #export LSCOLORS=GxFxCxDxBxGgGdAbAgAcAd  # bold
-        #export LSCOLORS=exfxcxdxbxegedabagacad # default
-
-        alias objcc="cc -framework Foundation"
-        alias glutc="gcc -O3 -framework GLUT -framework OpenGL -framework Cocoa"
-        alias l="ls -CF"
-
-        PS_SYM=''
-
-    elif [ `uname` = 'Linux' ]; then
-        alias ls="ls --color=auto"
-        alias l="ls -CF --hide=*.pyc"
-
-        PS_SYM='$'
-
-    else
-        PS_SYM='%'
-
-    fi
-
-    # use Vi-style keybinding; default is Emacs-style
-    #set -o vi
-
-    export LANG="en_US.UTF-8"
+if shopt -q login_shell ; then
+    : # login shell
+    export LANG="UTF-8"
     export LANGUAGE="en_US.UTF-8"
     export LC_ALL="en_US.UTF-8"
 
@@ -45,6 +14,37 @@ then
 
     export HOBOXROOT=~/hobox
     export EDITOR=`which vi`
+
+else
+    : # non-login shell
+fi
+
+
+if [ "$PS1" ]; then
+    # interactive-shell
+
+    if [ `uname` = 'Darwin' ]; then
+        PS_SYM=''
+
+        # enable `ls` color output
+        export CLICOLOR=1
+
+        alias objcc="cc -framework Foundation"
+        alias glutc="gcc -O3 -framework GLUT -framework OpenGL -framework Cocoa"
+        alias l="ls -CF"
+
+    elif [ `uname` = 'Linux' ]; then
+        PS_SYM='$'
+
+        alias ls="ls --color=auto"
+        alias l="ls -CF --hide=*.pyc"
+
+    else
+        PS_SYM='%'
+    fi
+
+    # use Vi-style keybinding; default is Emacs-style
+    #set -o vi
 
     alias ..="cd .."
     alias ...="cd ../.."
@@ -77,16 +77,6 @@ then
     # tput setaf {CODE}- Set foreground color, see color {CODE} below
     # tput setab {CODE}- Set background color, see color {CODE} below
     # Colors {code} code for tput command
-    # 
-    # Color {code}    Color
-    # 0    Black
-    # 1    Red
-    # 2    Green
-    # 3    Yellow
-    # 4    Blue
-    # 5    Magenta
-    # 6    Cyan
-    # 7    White
     ###############################
 
     INVERSE=$(tput rev)
@@ -117,13 +107,11 @@ then
 
     PS1='\n\[$RESET$MAGENTA\]\u\[$RESET$BASE00\]@\[$RESET$GREEN\]\h\[$RESET$BASE00\]:\[$RESET$BLUE\]\w \[$RESET$ORANGE\]$(git_branch)\[$RESET$BASE00\]$PS_SYM\[$RESET\] '
 
-    if [ `which vimpager 2>/dev/null` ]; then
-        export PAGER=`which vimpager`
-        alias vless=$PAGER
-    fi
+    #if [ `which vimpager 2>/dev/null` ]; then
+    #    export PAGER=`which vimpager`
+    #    alias vless=$PAGER
+    #fi
 
-
-    # Homebrew stuff
     if [ `which brew 2>/dev/null` ]; then
         BREW=`brew --prefix`
         if [ -f $BREW/etc/bash_completion ]; then
@@ -131,15 +119,12 @@ then
         fi
     fi
 
-
     it2bg() {
-        if [[ "$1" == l* ]]
-        then
+        if [[ "$1" == l* ]]; then
             echo -e "\033]50;SetProfile=Rio-light\a"
             export ITERM_PROFILE=Rio-light
             export COLORFGBG='11;15'
-        elif [[ "$1" == d* ]]
-        then
+        elif [[ "$1" == d* ]]; then
             echo -e "\033]50;SetProfile=Rio-dark\a"
             export ITERM_PROFILE=Rio-dark
             export COLORFGBG='12;8'
@@ -148,4 +133,6 @@ then
         fi
     }
 
+else
+    : # non-interactive shell
 fi
