@@ -133,14 +133,16 @@ then
 
 
     it2bg() {
-        if [ "$1" = 'light' ]
+        if [[ "$1" == l* ]]
         then
             echo -e "\033]50;SetProfile=Rio-light\a"
             export ITERM_PROFILE=Rio-light
-        elif [ "$1" = 'dark' ]
+            export COLORFGBG='11;15'
+        elif [[ "$1" == d* ]]
         then
             echo -e "\033]50;SetProfile=Rio-dark\a"
             export ITERM_PROFILE=Rio-dark
+            export COLORFGBG='12;8'
         else
             echo "Usage: $FUNCNAME [dark|light]"
         fi
