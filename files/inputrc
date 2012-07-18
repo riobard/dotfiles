@@ -10,6 +10,8 @@ set completion-ignore-case on
 # (subject to the value of mark-directories)
 set mark-symlinked-directories on
 
+set visible-stats on
+
 # display completion matches one per line
 #set completion-display-width 0  
 

@@ -12,9 +12,12 @@ if shopt -q login_shell ; then
     export GOPATH=~/go
     export PATH=$GOROOT/bin:$PATH
 
+
     export HOBOXROOT=~/hobox
     export EDITOR=`which vi`
 
+    # NEVER export this!!!
+    CDPATH=.:~:~/Projects
 else
     : # non-login shell
 fi

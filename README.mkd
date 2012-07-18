@@ -1,9 +1,4 @@
 dotfiles
 ========
 
-
-My dot configuration files. Running
-
-    ./install
-
-to link them to `~/`
+My configuration files. Run `./setup` to link them to `~/` and it's good to go. 
