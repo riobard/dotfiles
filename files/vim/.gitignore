@@ -1,0 +1,6 @@
+.*
+
+bundle/
+
+!.gitignore
+!.gitmodules
