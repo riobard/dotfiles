@@ -1,0 +1,26 @@
+# Tip: C-x C-r to reload this file in current session
+
+set editing-mode emacs  # or: vi
+
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set completion-ignore-case on
+
+# Completed names which are symbolic links to directories have a slash appended
+# (subject to the value of mark-directories)
+set mark-symlinked-directories on
+
+# display completion matches one per line
+#set completion-display-width 0  
+
+TAB: menu-complete
+"\e[Z": "\e-1\C-i"  #Shift-Tab: menu-complete-backward
+
+
+# M-X to `cd -` and `ls`
+"\ex": 'cd -\015ls\015'
+
+
+# Kill the word behind point, using white space and the slash character as the
+# word boundaries. The killed text is saved on the kill-ring.
+"\C-w": unix-filename-rubout

@@ -21,32 +21,30 @@ popd  > /dev/null
 #echo $SCRIPT_PATH
 
 
-
 link() 
 {
-    if [ -h ~/$1 ]; then
-        # symlink already exists. backup the old symlink and replace it
-        if [ "$(readlink ~/$1)" != "$SCRIPT_PATH/files/$1" ]; then
-            mv ~/$1 ~/$1.old
-            ln -s $SCRIPT_PATH/files/$1  ~/$1 
-            echo ~/$1 installed.
+    if [ -h ~/.$1 ]; then
+        # symlink already exists but different, backup
+        if [ "$(readlink ~/.$1)" != "$SCRIPT_PATH/files/$1" ]; then
+            mv ~/.$1 ~/.$1.old
+        else
+            return
         fi
     elif [ -e ~/$1 ]; then
         # file/dir already exists. backup it and symlink to the new one
-        mv ~/$1 ~/$1.old
-        ln -s $SCRIPT_PATH/files/$1  ~/$1 
-        echo ~/$1 installed.
-    else
-        # file/dir not exists. symlink
-        ln -s $SCRIPT_PATH/files/$1  ~/$1 
-        echo ~/$1 installed.
+        mv ~/.$1 ~/.$1.old
+        ln -s $SCRIPT_PATH/files/$1  ~/.$1 
+        echo ~/.$1 linked
     fi
+
+    ln -s $SCRIPT_PATH/files/$1  ~/.$1 
+    echo ~/.$1 installed.
 }
 
-
-for each in $SCRIPT_PATH/files/.*; do
+for each in $SCRIPT_PATH/files/*; do
     if [ -e $each ]; then
         link `basename $each` 
     fi
 done
 
+echo Dotfiles linked

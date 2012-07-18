@@ -43,9 +43,6 @@ if [ "$PS1" ]; then
         PS_SYM='%'
     fi
 
-    # use Vi-style keybinding; default is Emacs-style
-    #set -o vi
-
     alias ..="cd .."
     alias ...="cd ../.."
     alias ....="cd ../../.."
