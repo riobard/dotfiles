@@ -4,7 +4,31 @@
 set -e
 
 if [ -z $1 ]; then
-    DOTFILES=~/.dotfiles
+
+    # The following path detection code is copied from StackOverflow [1]. It is
+    # licensed under GPL 2.0. 
+    #
+    # <http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in/179231#179231>. 
+
+    # test if ths script is from a file or a pipe
+    if [ -z ${BASH_SOURCE[0]} ]; then
+        # from a pipe
+        DOTFILES=~/.dotfiles
+    else
+        # from a file
+        SCRIPT_PATH="${BASH_SOURCE[0]}"
+        if ([ -h "${SCRIPT_PATH}" ]) then
+        while ([ -h "${SCRIPT_PATH}" ]) do 
+            SCRIPT_PATH=`readlink "${SCRIPT_PATH}"`
+        done
+        fi
+        pushd . > /dev/null
+        cd `dirname ${SCRIPT_PATH}` > /dev/null
+        SCRIPT_PATH=`pwd`;
+        popd  > /dev/null
+        DOTFILES=$SCRIPT_PATH
+    fi
+
 else
     DOTFILES=$1
 fi
