@@ -54,6 +54,9 @@ linkall() {
 clone() {
     if ! [[ -d ~/.dotfiles ]]; then
         git clone git@github.com:riobard/dotfiles ~/.dotfiles
+    else
+        cd ~/.dotfiles
+        git pull
     fi
     return 0
 }
