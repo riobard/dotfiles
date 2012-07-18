@@ -1,10 +1,12 @@
 #!/bin/bash
-#
+
+# exit bash if any command fails
+set -e
+
 # The following path detection code is copied from StackOverflow [1]. It is 
 # licensed under GPL 2.0. 
 #
 # [1]: <http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in/179231#179231>. 
-
 
 SCRIPT_PATH="${BASH_SOURCE[0]}"
 if ([ -h "${SCRIPT_PATH}" ]) then
@@ -17,12 +19,10 @@ cd `dirname ${SCRIPT_PATH}` > /dev/null
 SCRIPT_PATH=`pwd`;
 popd  > /dev/null
 
-
 #echo $SCRIPT_PATH
 
 
-link() 
-{
+link() {
     if [ -h ~/.$1 ]; then
         # symlink already exists but different, backup
         if [ "$(readlink ~/.$1)" != "$SCRIPT_PATH/files/$1" ]; then
@@ -33,18 +33,41 @@ link()
     elif [ -e ~/$1 ]; then
         # file/dir already exists. backup it and symlink to the new one
         mv ~/.$1 ~/.$1.old
-        ln -s $SCRIPT_PATH/files/$1  ~/.$1 
-        echo ~/.$1 linked
     fi
 
     ln -s $SCRIPT_PATH/files/$1  ~/.$1 
-    echo ~/.$1 installed.
+    echo ~/.$1 linked
+    return 0
 }
 
-for each in $SCRIPT_PATH/files/*; do
-    if [ -e $each ]; then
-        link `basename $each` 
-    fi
-done
 
-echo Dotfiles linked
+linkall() {
+    for each in $SCRIPT_PATH/files/*; do
+        if [ -e $each ]; then
+            link `basename $each` 
+        fi
+    done
+    echo Dotfiles linked
+    return 0
+}
+
+clone() {
+    if ! [[ -d ~/.dotfiles ]]; then
+        git clone git@github.com:riobard/dotfiles ~/.dotfiles
+    fi
+    return 0
+}
+
+vim_vundle() {
+    if ! [[ -d ~/.vim/bundle/vundle ]]; then
+        git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+    fi
+
+    vi +BundleInstall +qall
+    return 0
+}
+
+
+clone
+linkall
+vim_vundle
