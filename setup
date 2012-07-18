@@ -28,7 +28,7 @@ link() {
         if [ "$(readlink ~/.$1)" != "$SCRIPT_PATH/files/$1" ]; then
             mv ~/.$1 ~/.$1.old
         else
-            return
+            return 0
         fi
     elif [ -e ~/$1 ]; then
         # file/dir already exists. backup it and symlink to the new one
@@ -66,7 +66,7 @@ vim_vundle() {
         git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
     fi
 
-    vi +BundleInstall +qall
+    vi +BundleInstall +qall -
     return 0
 }
 
