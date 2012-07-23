@@ -101,7 +101,7 @@ if [ "$PS1" ]; then
     CYAN=$(tput setaf 6)
     GREEN=$(tput setaf 2)
 
-    PS1='\n\[$RESET$MAGENTA\]\u\[$RESET$BASE00\]@\[$RESET$GREEN\]\h\[$RESET$BASE00\]:\[$RESET$BLUE\]\w\[$RESET$ORANGE\]$(git_branch) \[$RESET$BASE00\]$PS_SYM\[$RESET\] '
+    PS1='\n\[$RESET$MAGENTA\]\u\[$RESET$BASE00\]@\[$RESET$GREEN\]\h\[$RESET$BASE00\]:\[$RESET$BLUE\]\w\[$RESET$ORANGE\]$(__git_ps1) \[$RESET$BASE00\]$PS_SYM\[$RESET\] '
 
     #if [ `which vimpager 2>/dev/null` ]; then
     #    export PAGER=`which vimpager`
