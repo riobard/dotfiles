@@ -26,6 +26,10 @@ fi
 if [ "$PS1" ]; then
     # interactive-shell
 
+    # Save multiline command in history
+    shopt -s cmdhist
+    shopt -s lithist
+
     if [ `uname` = 'Darwin' ]; then
         PS_SYM=''
 
