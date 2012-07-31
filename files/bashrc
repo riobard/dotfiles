@@ -101,7 +101,11 @@ if [ "$PS1" ]; then
         local GREEN="\[$(tput setaf 2)\]"
         local RESET="\[$(tput sgr0)\]"
 
-        PS1="$MAGENTA\u$RESET@$GREEN\h$RESET:$BLUE\w$ORANGE$(__git_ps1) $RESET$PS_SYM$RESET "
+        PS1="$MAGENTA\u$RESET@$GREEN\h$RESET:$BLUE\w$ORANGE\$(__git_ps1) $RESET$PS_SYM$RESET "
+        # Expand colors right away, but scape $ of the __git_ps1 function call
+        # so that it is evaluated when the prompt is printed instead of the 
+        # first time PS1 is defined. Otherwise you'll get a git branch in PS1
+        # which never changes.
     }
 
     ps1
