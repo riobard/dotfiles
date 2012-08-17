@@ -66,10 +66,10 @@ linkall() {
 }
 
 clone() {
-    if ! [[ -d ~/.dotfiles ]]; then
+    if ! [[ -d $DOTFILES ]]; then
         git clone git@github.com:riobard/dotfiles $DOTFILES
     else
-        cd ~/.dotfiles
+        cd $DOTFILES
         git pull
     fi
     return 0
