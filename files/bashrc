@@ -79,7 +79,13 @@ if [ "$PS1" ]; then
         source /usr/local/etc/bash_completion
     fi
 
-
+    __git_branch () 
+    { 
+        local b="$(git symbolic-ref HEAD 2>/dev/null)";
+        if [ -n "$b" ]; then
+            printf " (%s)" "${b##refs/heads/}";
+        fi
+    }
 
     ps1() {
         # Solarized colorscheme
@@ -101,7 +107,7 @@ if [ "$PS1" ]; then
         local GREEN="\[$(tput setaf 2)\]"
         local RESET="\[$(tput sgr0)\]"
 
-        PS1="$MAGENTA\u$RESET@$GREEN\h$RESET:$BLUE\w$ORANGE\$(__git_ps1) $RESET$PS_SYM$RESET "
+        PS1="$MAGENTA\u$RESET@$GREEN\h$RESET:$BLUE\w$ORANGE\$(__git_branch) $RESET$PS_SYM$RESET "
         # Expand colors right away, but scape $ of the __git_ps1 function call
         # so that it is evaluated when the prompt is printed instead of the 
         # first time PS1 is defined. Otherwise you'll get a git branch in PS1
