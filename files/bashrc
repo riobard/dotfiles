@@ -128,12 +128,12 @@ if [ "$PS1" ]; then
 
     it2bg() {
         if [[ "$1" == l* ]]; then
-            echo -e "\033]50;SetProfile=Rio-light\a"
-            export ITERM_PROFILE=Rio-light
+            echo -e "\033]50;SetProfile=Solarized Light\a"
+            export ITERM_PROFILE='Solarized Light'
             export COLORFGBG='11;15'
         elif [[ "$1" == d* ]]; then
-            echo -e "\033]50;SetProfile=Rio-dark\a"
-            export ITERM_PROFILE=Rio-dark
+            echo -e "\033]50;SetProfile=Solarized Dark\a"
+            export ITERM_PROFILE='Solarized Dark'
             export COLORFGBG='12;8'
         else
             echo "Usage: $FUNCNAME [dark|light]"
