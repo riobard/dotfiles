@@ -58,6 +58,8 @@ Bundle 'nanotech/jellybeans.vim'
 Bundle 'tomasr/molokai'
 Bundle 'sickill/vim-monokai'
 
+Bundle 'spolu/dwm.vim'
+
 " Vim-scripts repos
 Bundle 'surround.vim'
 Bundle 'matchit.zip'

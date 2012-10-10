@@ -12,7 +12,7 @@ if shopt -q login_shell ; then
         export GOROOT=`go env GOROOT`
         #export GOROOT=/usr/local/go
         #export PATH=$GOROOT/bin:$PATH
-        #export GOPATH=~/go
+        export GOPATH=~/go
     fi
 
     export HOBOXROOT=~/hobox
