@@ -1,2 +1,2 @@
-set noexpandtab
-set ts=4 sts=4 sw=4
+autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4 nolist
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
