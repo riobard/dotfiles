@@ -92,6 +92,9 @@ nmap <silent> ,/ :let @/=""<CR>
 " Toggle `set list` to show invisible chars
 nmap <leader>l :set list!<CR>
 
+" Toggle paste mode
+nmap <leader>p :set paste!<CR>
+
 " Use these symbols for invisible chars
 set listchars=tab:⇥\ ,trail:␣,eol:↩,nbsp:␣,extends:…,precedes:…
 
