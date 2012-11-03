@@ -22,7 +22,7 @@ if shopt -q login_shell ; then
     fi
 
     # NEVER export this!!!
-    CDPATH=.:~:~/Projects
+    #CDPATH=.:~:~/Projects
 else
     : # non-login shell
 fi
