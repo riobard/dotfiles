@@ -57,6 +57,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'tomasr/molokai'
 Bundle 'sickill/vim-monokai'
+Bundle 'msanders/snipmate.vim'
 
 Bundle 'spolu/dwm.vim'
 
