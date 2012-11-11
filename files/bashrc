@@ -13,6 +13,7 @@ if shopt -q login_shell ; then
         #export GOROOT=/usr/local/go
         #export PATH=$GOROOT/bin:$PATH
         export GOPATH=~/go
+        export PATH=$PATH:~/go/bin
     fi
 
     export HOBOXROOT=~/hobox
