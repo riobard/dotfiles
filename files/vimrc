@@ -26,7 +26,7 @@ Bundle 'gmarik/vundle'
 Bundle 'Townk/vim-autoclose'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-fugitive'
-Bundle 'riobard/vim-cute-python'
+"Bundle 'riobard/vim-cute-python'
 Bundle 'tpope/vim-vividchalk'
 Bundle 'tpope/vim-haml'
 Bundle 'adimit/prolog.vim'
@@ -35,6 +35,7 @@ Bundle 'godlygeek/tabular'
 
 Bundle 'majutsushi/tagbar'
 Bundle 'scrooloose/nerdtree'
+let NERDTreeIgnore=['\.pyc', '\.pyo']
 map <leader>t :NERDTree\|TagbarToggle<CR>
 com TT NERDTree | TagbarToggle
 
