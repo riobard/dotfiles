@@ -1,1 +1,1 @@
-au BufRead,BufNewFile *.rl set filetype=ragel
+au BufRead,BufNewFile *.rl setf ragel

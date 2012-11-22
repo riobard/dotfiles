@@ -1,3 +1,3 @@
-set list
-"set listchars=tab:▸\ ,eol:¬
-set listchars=tab:▸\ 
+setlocal list
+"setlocal listchars=tab:▸\ ,eol:¬
+setlocal listchars=tab:▸\ 
