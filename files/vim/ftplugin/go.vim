@@ -46,16 +46,14 @@ setlocal foldmethod=syntax
 
 function! GoFoldText()
     let line = getline(v:foldstart)
-
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
-
-    let line = substitute(line, '{\|/\*\|\*/\|{{{\d\=', '', 'g')
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-    "return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
-    return line . "[" . foldedlinecount . " lines]"
+    " remove trailing { and replace with {…}
+    let line = substitute(line, '{$', '{…}', 'g')
+    " remove leading tabs
+    let line = substitute(line, '^\t*', '', 'g')
+    let indent = repeat(' ', indent(v:foldstart))
+    let foldsize = v:foldend - v:foldstart
+    let sizeTxt = ' ['.foldsize.' line'.(foldsize>1?'s':'').']'
+    return indent.line.sizeTxt
 endfunction
 
 setlocal foldtext=GoFoldText()
