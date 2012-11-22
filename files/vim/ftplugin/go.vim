@@ -40,3 +40,22 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
     \ }
+
+
+setlocal foldmethod=syntax
+
+function! GoFoldText()
+    let line = getline(v:foldstart)
+
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+    let line = substitute(line, '{\|/\*\|\*/\|{{{\d\=', '', 'g')
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+    "return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+    return line . "[" . foldedlinecount . " lines]"
+endfunction
+
+setlocal foldtext=GoFoldText()
