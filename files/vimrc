@@ -48,3 +48,11 @@ Bundle 'httplog'
 Bundle 'DrawIt'
 
 filetype plugin indent on   " required by Vundle
+
+
+" Powerline options seem to only work in .vimrc. Binding too late has no
+" effect. Fancy symbols require patched font to render properly, and they
+" introduce a start delay on OS X, possibly due to font fallback mechanism.
+" See issue #163: https://github.com/Lokaltog/vim-powerline/issues/163
+"let g:Powerline_symbols = 'unicode' 
+"let g:Powerline_symbols = 'fancy'

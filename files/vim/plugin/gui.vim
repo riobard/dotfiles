@@ -7,11 +7,11 @@ if has("gui_running")
     set go-=L               " no scrollbar even if split
     set go-=R               " no scrollbar even if split
 
-
     " Make MacVim looks cool
     if has("gui_macvim")
         "set guifont=Monaco:h12
-        set guifont=Source\ Code\ Pro:h12
+        "set guifont=Menlo\ for\ Powerline:h12
+        set guifont=Source\ Code\ Pro\ for\ Powerline:h12
 
         " Enable meta- kind binding for GUI
         set macmeta
