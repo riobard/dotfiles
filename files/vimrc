@@ -37,6 +37,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
+Bundle 'uarun/vim-protobuf'
 
 " Vim-scripts repos
 Bundle 'surround.vim'
@@ -46,13 +47,15 @@ Bundle 'cocoa.vim'
 Bundle 'applescript.vim'
 Bundle 'httplog'
 Bundle 'DrawIt'
+Bundle 'vim-json-bundle'
 
 filetype plugin indent on   " required by Vundle
 
-
 " Powerline options seem to only work in .vimrc. Binding too late has no
-" effect. Fancy symbols require patched font to render properly, and they
-" introduce a start delay on OS X, possibly due to font fallback mechanism.
-" See issue #163: https://github.com/Lokaltog/vim-powerline/issues/163
-"let g:Powerline_symbols = 'unicode' 
+" effect. Fancy symbols require patched font to render properly.  Both
+" `unicode` and `fancy` options introduce a start delay on OS X, possibly due
+" to font fallback mechanism.  See issue #163:
+" https://github.com/Lokaltog/vim-powerline/issues/163
+"
+"let g:Powerline_symbols = 'unicode'
 "let g:Powerline_symbols = 'fancy'

@@ -4,7 +4,7 @@ if shopt -q login_shell ; then
     export LANGUAGE="en_US.UTF-8"
     export LC_ALL="en_US.UTF-8"
 
-    export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
+    export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/python:/usr/local/share/npm/bin/:$PATH
 
     export JAVA_OPTS="-Dfile.encoding=utf-8 -Xmx2g"
 
