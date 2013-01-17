@@ -1,0 +1,4 @@
+--smart-case
+--pager=less -r
+
+--type-set=markdown=.md,.mkd,.mkdn,.mdown,.markdown
