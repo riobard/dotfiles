@@ -18,7 +18,7 @@ set visualbell noerrorbells
 set modeline modelines=5
 
 " Hightlight cursor position
-set cursorline  "cursorcolumn
+"set cursorline  "cursorcolumn
 
 
 set fenc=utf8 fencs=utf8,gb2312,big5

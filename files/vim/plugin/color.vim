@@ -1,7 +1,7 @@
 syntax enable   " enable syntax highlighting
 
 set t_Co=256    " Use 256 colors to display correctly in console
-silent! colo solarized
+"silent! colo solarized
 
 "" light colorschemes
 "silent! colo tangolight
