@@ -36,25 +36,7 @@ if [ "$PS1" ]; then
     shopt -s cmdhist
     shopt -s lithist
 
-    if [ `uname` = 'Darwin' ]; then
-        PS_SYM=''
-
-        # enable `ls` color output
-        export CLICOLOR=1
-
-        alias objcc="cc -framework Foundation"
-        alias glutc="gcc -O3 -framework GLUT -framework OpenGL -framework Cocoa"
-        alias l="ls -CF"
-
-    elif [ `uname` = 'Linux' ]; then
-        PS_SYM='$'
-
-        alias ls="ls --color=auto"
-        alias l="ls -CF --hide=*.pyc"
-
-    else
-        PS_SYM='%'
-    fi
+    # aliases
 
     alias ..="cd .."
     alias ...="cd ../.."
@@ -85,42 +67,113 @@ if [ "$PS1" ]; then
         source /usr/local/etc/bash_completion
     fi
 
+    if [ `uname` = 'Darwin' ]; then
+        PS_SYM=''
+
+        # enable `ls` color output
+        export CLICOLOR=1
+
+        alias l="ls -CF"
+
+    elif [ `uname` = 'Linux' ]; then
+        PS_SYM='$'
+
+        alias ls="ls --color=auto"
+        alias l="ls -CF --hide=*.pyc"
+
+    else
+        PS_SYM='%'
+    fi
+
+
     __git_branch () 
     { 
-        local b="$(git symbolic-ref HEAD 2>/dev/null)";
-        if [ -n "$b" ]; then
-            printf " (%s)" "${b##refs/heads/}";
+        local branch="$(git symbolic-ref HEAD 2>/dev/null)";
+        if [ -z "$branch" ]; then return; fi
+
+        local marks
+
+        # branch is modified
+        if [ -n "$(git status --porcelain)" ]; then
+            marks+="+"
         fi
+
+        # local branch is ahead of remote
+        if [ -n "$(git rev-list HEAD --not --remotes)" ]; then
+            marks+="↥"
+        fi
+
+        # space between branch name and marks if marks is not empty
+        if [ -n "$marks" ]; then
+            marks=" $marks"
+        fi
+
+        # print the git branch segment
+        printf " ⑂ %s%s " "${branch##refs/heads/}" "$marks";
     }
 
-    ps1() {
-        # Solarized colorscheme
-        local BASE03="\[$(tput setaf 8)\]"
-        local BASE02="\[$(tput setaf 0)\]"
-        local BASE01="\[$(tput setaf 10)\]"
-        local BASE00="\[$(tput setaf 11)\]"
-        local BASE0="\[$(tput setaf 12)\]"
-        local BASE1="\[$(tput setaf 14)\]"
-        local BASE2="\[$(tput setaf 7)\]"
-        local BASE3="\[$(tput setaf 15)\]"
-        local YELLOW="\[$(tput setaf 3)\]"
-        local ORANGE="\[$(tput setaf 9)\]"
-        local RED="\[$(tput setaf 1)\]"
-        local MAGENTA="\[$(tput setaf 5)\]"
-        local VIOLET="\[$(tput setaf 13)\]"
-        local BLUE="\[$(tput setaf 4)\]"
-        local CYAN="\[$(tput setaf 6)\]"
-        local GREEN="\[$(tput setaf 2)\]"
-        local RESET="\[$(tput sgr0)\]"
 
-        PS1="$MAGENTA\u$RESET@$GREEN\h$RESET:$BLUE\w$ORANGE\$(__git_branch) $RESET$PS_SYM$RESET "
+    # Solarized colorscheme
+    BASE03="\[$(tput setaf 8)\]"
+    BASE02="\[$(tput setaf 0)\]"
+    BASE01="\[$(tput setaf 10)\]"
+    BASE00="\[$(tput setaf 11)\]"
+    BASE0="\[$(tput setaf 12)\]"
+    BASE1="\[$(tput setaf 14)\]"
+    BASE2="\[$(tput setaf 7)\]"
+    BASE3="\[$(tput setaf 15)\]"
+
+    BG_BASE03="\[$(tput setab 8)\]"
+    BG_BASE02="\[$(tput setab 0)\]"
+    BG_BASE01="\[$(tput setab 10)\]"
+    BG_BASE00="\[$(tput setab 11)\]"
+    BG_BASE0="\[$(tput setab 12)\]"
+    BG_BASE1="\[$(tput setab 14)\]"
+    BG_BASE2="\[$(tput setab 7)\]"
+    BG_BASE3="\[$(tput setab 15)\]"
+
+    YELLOW="\[$(tput setaf 3)\]"
+    ORANGE="\[$(tput setaf 9)\]"
+    RED="\[$(tput setaf 1)\]"
+    MAGENTA="\[$(tput setaf 5)\]"
+    VIOLET="\[$(tput setaf 13)\]"
+    BLUE="\[$(tput setaf 4)\]"
+    CYAN="\[$(tput setaf 6)\]"
+    GREEN="\[$(tput setaf 2)\]"
+
+    BG_YELLOW="\[$(tput setab 3)\]"
+    BG_ORANGE="\[$(tput setab 9)\]"
+    BG_RED="\[$(tput setab 1)\]"
+    BG_MAGENTA="\[$(tput setab 5)\]"
+    BG_VIOLET="\[$(tput setab 13)\]"
+    BG_BLUE="\[$(tput setab 4)\]"
+    BG_CYAN="\[$(tput setab 6)\]"
+    BG_GREEN="\[$(tput setab 2)\]"
+
+    REV="\[$(tput rev)\]"
+    RESET="\[$(tput sgr0)\]"
+    BOLD="\[$(tput bold)\]"
+
+    ps1() {
+        # Check the exit code of the previous command and display different
+        # colors in the prompt accordingly. 
+        if [ $? = 0 ]; then
+            local BG_EXIT="$BG_BLUE"
+        else
+            local BG_EXIT="$BG_RED"
+        fi
+
+        #PS1="$MAGENTA\u$RESET@$GREEN\h$RESET:$BLUE\w$ORANGE\$(__git_branch) $RESET$PS_SYM$RESET "
         # Expand colors right away, but scape $ of the __git_ps1 function call
         # so that it is evaluated when the prompt is printed instead of the 
         # first time PS1 is defined. Otherwise you'll get a git branch in PS1
         # which never changes.
+
+        PS1="$BG_GREEN$BASE2 \w $BG_BASE2$ORANGE\$(__git_branch)$BG_EXIT$BASE3 $PS_SYM $RESET "
+
     }
 
-    ps1
+    export PROMPT_COMMAND=ps1
 
     #if [ `which vimpager 2>/dev/null` ]; then
     #    export PAGER=`which vimpager`
@@ -140,6 +193,19 @@ if [ "$PS1" ]; then
             echo "Usage: $FUNCNAME [dark|light]"
         fi
     }
+
+    # zsh-style preexec function which execute before each command
+    preexec () { 
+        :;
+    }
+
+    preexec_invoke_exec () {
+        [ -n "$COMP_LINE" ] && return  # do nothing if completing
+        [ "$BASH_COMMAND" = "$PROMPT_COMMAND" ] && return # don't cause a preexec for $PROMPT_COMMAND
+        local this_command=`history 1 | sed -e "s/^[ ]*[0-9]*[ ]*//g"`;
+        preexec "$this_command"
+    }
+    trap 'preexec_invoke_exec' DEBUG
 
 else
     : # non-interactive shell

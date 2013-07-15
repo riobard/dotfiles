@@ -16,7 +16,7 @@ Bundle 'gmarik/vundle'
 "Bundle 'riobard/vim-cute-python'
 "Bundle 'sickill/vim-monokai'
 "Bundle 'tpope/vim-vividchalk'
-Bundle 'Lokaltog/vim-powerline'
+"Bundle 'Lokaltog/vim-powerline'    " deprecated
 Bundle 'Townk/vim-autoclose'
 Bundle 'adimit/prolog.vim'
 Bundle 'altercation/vim-colors-solarized'
@@ -61,3 +61,6 @@ filetype plugin indent on   " required by Vundle
 "
 "let g:Powerline_symbols = 'unicode'
 "let g:Powerline_symbols = 'fancy'
+
+
+set rtp+=~/Projects/powerline/powerline/bindings/vim
