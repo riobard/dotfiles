@@ -1,57 +1,60 @@
-set shell=/bin/bash\ -li " https://github.com/gmarik/vundle/issues/175
-"set shellcmdflag=-ic       " use an interactive login shell for $PATH
-
 set nocompatible
-filetype off        " required to use Vundle
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+try
+    filetype off        " required to use Vundle
+    set shell=/bin/bash\ -li " https://github.com/gmarik/vundle/issues/175
+    "set shellcmdflag=-ic       " use an interactive login shell for $PATH
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#rc()
 
-" let Vundle manage Vundle (required!)
-Bundle 'gmarik/vundle'
+    " let Vundle manage Vundle (required!)
+    Bundle 'gmarik/vundle'
 
-" GitHub repos
-Bundle 'nanotech/jellybeans.vim'
-"Bundle 'riobard/vim-cute-python'
-Bundle 'sickill/vim-monokai'
-Bundle 'tpope/vim-vividchalk'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'Townk/vim-autoclose'
-Bundle 'adimit/prolog.vim'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'godlygeek/tabular'
-Bundle 'jpalardy/vim-slime'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'kien/ctrlp.vim'
-Bundle 'majutsushi/tagbar'
-Bundle 'mileszs/ack.vim'
-Bundle 'msanders/snipmate.vim'
-Bundle 'nelstrom/vim-markdown-folding'
-Bundle 'nelstrom/vim-mac-classic-theme'
-Bundle 'riobard/scala.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'spolu/dwm.vim'
-Bundle 'tomasr/molokai'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-repeat'
-Bundle 'uarun/vim-protobuf'
-Bundle 'ap/vim-css-color'
-"Bundle 'jacekd/vim-iawriter'
-"Bundle 'laktek/distraction-free-writing-vim'
-Bundle 'kien/rainbow_parentheses.vim'
+    " GitHub repos
+    Bundle 'nanotech/jellybeans.vim'
+    "Bundle 'riobard/vim-cute-python'
+    Bundle 'sickill/vim-monokai'
+    Bundle 'tpope/vim-vividchalk'
+    Bundle 'Lokaltog/vim-powerline'
+    Bundle 'Townk/vim-autoclose'
+    Bundle 'adimit/prolog.vim'
+    Bundle 'altercation/vim-colors-solarized'
+    Bundle 'godlygeek/tabular'
+    Bundle 'jpalardy/vim-slime'
+    Bundle 'kchmck/vim-coffee-script'
+    Bundle 'kien/ctrlp.vim'
+    Bundle 'majutsushi/tagbar'
+    Bundle 'mileszs/ack.vim'
+    Bundle 'msanders/snipmate.vim'
+    Bundle 'nelstrom/vim-markdown-folding'
+    Bundle 'nelstrom/vim-mac-classic-theme'
+    Bundle 'riobard/scala.vim'
+    Bundle 'scrooloose/nerdtree'
+    Bundle 'scrooloose/syntastic'
+    Bundle 'spolu/dwm.vim'
+    Bundle 'tomasr/molokai'
+    Bundle 'tpope/vim-fugitive'
+    Bundle 'tpope/vim-haml'
+    Bundle 'tpope/vim-markdown'
+    Bundle 'tpope/vim-repeat'
+    Bundle 'uarun/vim-protobuf'
+    Bundle 'ap/vim-css-color'
+    "Bundle 'jacekd/vim-iawriter'
+    "Bundle 'laktek/distraction-free-writing-vim'
+    Bundle 'kien/rainbow_parentheses.vim'
 
-" Vim-scripts repos
-Bundle 'surround.vim'
-Bundle 'matchit.zip'
-Bundle 'nginx.vim'
-Bundle 'cocoa.vim'
-Bundle 'applescript.vim'
-Bundle 'httplog'
-Bundle 'DrawIt'
-Bundle 'vim-json-bundle'
+    " Vim-scripts repos
+    Bundle 'surround.vim'
+    Bundle 'matchit.zip'
+    Bundle 'nginx.vim'
+    Bundle 'cocoa.vim'
+    Bundle 'applescript.vim'
+    Bundle 'httplog'
+    Bundle 'DrawIt'
+    Bundle 'vim-json-bundle'
+catch /E117:/
+    " Vundle is not available
+endtry
 
 filetype plugin indent on   " required by Vundle
 
@@ -202,15 +205,18 @@ set t_Co=256    " Use 256 colors to display correctly in console
 
 "" Solarized color scheme and my tweaks
 silent! colo solarized
-if g:colors_name == 'solarized'
-    if &background == 'dark'
-        hi Normal ctermfg=7     " brighter color for the main text
-        hi NonText ctermbg=0    " same background as ColorColumn
-    else
-        hi Normal ctermfg=0     " darker color for the main text
-        hi NonText ctermbg=7    " same background as ColorColumn
+try
+    if g:colors_name == 'solarized'
+        if &background == 'dark'
+            hi Normal ctermfg=7     " brighter color for the main text
+            hi NonText ctermbg=0    " same background as ColorColumn
+        else
+            hi Normal ctermfg=0     " darker color for the main text
+            hi NonText ctermbg=7    " same background as ColorColumn
+        endif
     endif
-endif
+catch /E121:/   " g:colors_name does not exist i.e. no colorscheme is set
+endtry
 
 "" light colorschemes
 "silent! colo tangolight
