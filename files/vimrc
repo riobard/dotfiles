@@ -41,6 +41,7 @@ Bundle 'uarun/vim-protobuf'
 Bundle 'ap/vim-css-color'
 "Bundle 'jacekd/vim-iawriter'
 "Bundle 'laktek/distraction-free-writing-vim'
+Bundle 'kien/rainbow_parentheses.vim'
 
 " Vim-scripts repos
 Bundle 'surround.vim'
@@ -416,6 +417,20 @@ let g:slime_target = "tmux"
 
 " hide some file extensions
 let NERDTreeIgnore=['\.pyc', '\.pyo']
+
+
+
+""" Rainbow plugin https://github.com/kien/rainbow_parentheses.vim
+function s:load_rainbow_parentheses()
+    if exists(':RainbowParenthesesToggle')
+        au Syntax * RainbowParenthesesLoadRound
+        au Syntax * RainbowParenthesesLoadSquare
+        au Syntax * RainbowParenthesesLoadBraces
+        RainbowParenthesesToggle
+    endif
+endfunction
+
+au VimEnter * :call s:load_rainbow_parentheses()
 
 
 """ GUI
