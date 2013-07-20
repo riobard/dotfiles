@@ -1,2 +1,0 @@
-
-let NERDTreeIgnore=['\.pyc', '\.pyo']

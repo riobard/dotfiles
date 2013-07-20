@@ -1,212 +1,94 @@
-if shopt -q login_shell ; then
-    : # login shell
+if shopt -q login_shell ; then # login shell
     export LANG="UTF-8"
     export LANGUAGE="en_US.UTF-8"
     export LC_ALL="en_US.UTF-8"
 
     export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/python:/usr/local/share/npm/bin/:$PATH
 
-    export JAVA_OPTS="-Dfile.encoding=utf-8 -Xmx2g"
-
-    if [ `which go 2>/dev/null`  ]; then
-        export GOROOT=`go env GOROOT`
-        #export GOROOT=/usr/local/go
+    if [ -n "$(which go)" ]; then
+        export GOROOT="$(go env GOROOT)"
         #export PATH=$GOROOT/bin:$PATH
         export GOPATH=~/go
         export PATH=$PATH:~/go/bin
     fi
 
-    export HOBOXROOT=~/hobox
-
-    if [ `which vi 2>/dev/null` ]; then
-        export EDITOR=`which vi`
-    fi
-
-    # NEVER export this!!!
-    #CDPATH=.:~:~/Projects
-else
-    : # non-login shell
+    [ -n "$(which vi)" ] && export EDITOR="$(which vi)"
 fi
 
 
-if [ "$PS1" ]; then
-    # interactive-shell
+if [ -n "$PS1" ]; then  # interactive-shell
 
     # Save multiline command in history
     shopt -s cmdhist
     shopt -s lithist
 
     # aliases
-
     alias ..="cd .."
     alias ...="cd ../.."
     alias ....="cd ../../.."
-
     alias ll="ls -lh"
     alias la="ls -ha"
     alias lla="ls -lha"
-
     alias grep="grep --color=auto"
     alias egrep="egrep --color=auto"
-
     alias g="git add -A"
     alias gg="git add -A && git commit"
     alias ggg="git add -A && git commit && git push"
-
     alias ipy="ipython"
     alias bpy="bpython"
     alias py="python"
     alias tree="tree -C"
     alias vbox='VBoxManage'
 
-    if [ -f /etc/bash_completion ]; then
-        source /etc/bash_completion
+    case "$(uname)" in 
+        Darwin)
+            # color ls output
+            export CLICOLOR=1
+            alias l="ls -CF"
+            ;;
+        Linux)
+            alias ls="ls --color=auto"
+            alias l="ls -CF --hide=*.pyc"
+            ;;
+        *)
+    esac
+
+
+    if [ "$TERM_PROGRAM" = "iTerm.app" ]; then
+        # switch iTerm2 profiles
+        i2p() {
+            case "$1" in
+                l*)
+                    echo -e "\033]50;SetProfile=SolarizedLight\a"
+                    export ITERM_PROFILE='SolarizedLight'
+                    export COLORFGBG='11;15'
+                    ;;
+                d*)
+                    echo -e "\033]50;SetProfile=SolarizedDark\a"
+                    export ITERM_PROFILE='SolarizedDark'
+                    export COLORFGBG='12;8'
+                    ;;
+                *)
+                    echo "Switch iTerm2 profile"
+                    echo "Usage: $FUNCNAME [dark|light]"
+            esac
+        }
     fi
-
-    if [ -f /usr/local/etc/bash_completion ]; then
-        source /usr/local/etc/bash_completion
-    fi
-
-    if [ `uname` = 'Darwin' ]; then
-        PS_SYM=''
-
-        # enable `ls` color output
-        export CLICOLOR=1
-
-        alias l="ls -CF"
-
-    elif [ `uname` = 'Linux' ]; then
-        PS_SYM='$'
-
-        alias ls="ls --color=auto"
-        alias l="ls -CF --hide=*.pyc"
-
-    else
-        PS_SYM='%'
-    fi
-
-
-    __git_branch () 
-    { 
-        local branch="$(git symbolic-ref HEAD 2>/dev/null)";
-        if [ -z "$branch" ]; then return; fi
-
-        local marks
-
-        # branch is modified
-        if [ -n "$(git status --porcelain)" ]; then
-            marks+="+"
-        fi
-
-        # local branch is ahead of remote
-        if [ -n "$(git rev-list HEAD --not --remotes)" ]; then
-            marks+="↥"
-        fi
-
-        # space between branch name and marks if marks is not empty
-        if [ -n "$marks" ]; then
-            marks=" $marks"
-        fi
-
-        # print the git branch segment
-        printf " ⑂ %s%s " "${branch##refs/heads/}" "$marks";
-    }
-
-
-    # Solarized colorscheme
-    BASE03="\[$(tput setaf 8)\]"
-    BASE02="\[$(tput setaf 0)\]"
-    BASE01="\[$(tput setaf 10)\]"
-    BASE00="\[$(tput setaf 11)\]"
-    BASE0="\[$(tput setaf 12)\]"
-    BASE1="\[$(tput setaf 14)\]"
-    BASE2="\[$(tput setaf 7)\]"
-    BASE3="\[$(tput setaf 15)\]"
-
-    BG_BASE03="\[$(tput setab 8)\]"
-    BG_BASE02="\[$(tput setab 0)\]"
-    BG_BASE01="\[$(tput setab 10)\]"
-    BG_BASE00="\[$(tput setab 11)\]"
-    BG_BASE0="\[$(tput setab 12)\]"
-    BG_BASE1="\[$(tput setab 14)\]"
-    BG_BASE2="\[$(tput setab 7)\]"
-    BG_BASE3="\[$(tput setab 15)\]"
-
-    YELLOW="\[$(tput setaf 3)\]"
-    ORANGE="\[$(tput setaf 9)\]"
-    RED="\[$(tput setaf 1)\]"
-    MAGENTA="\[$(tput setaf 5)\]"
-    VIOLET="\[$(tput setaf 13)\]"
-    BLUE="\[$(tput setaf 4)\]"
-    CYAN="\[$(tput setaf 6)\]"
-    GREEN="\[$(tput setaf 2)\]"
-
-    BG_YELLOW="\[$(tput setab 3)\]"
-    BG_ORANGE="\[$(tput setab 9)\]"
-    BG_RED="\[$(tput setab 1)\]"
-    BG_MAGENTA="\[$(tput setab 5)\]"
-    BG_VIOLET="\[$(tput setab 13)\]"
-    BG_BLUE="\[$(tput setab 4)\]"
-    BG_CYAN="\[$(tput setab 6)\]"
-    BG_GREEN="\[$(tput setab 2)\]"
-
-    REV="\[$(tput rev)\]"
-    RESET="\[$(tput sgr0)\]"
-    BOLD="\[$(tput bold)\]"
-
-    ps1() {
-        # Check the exit code of the previous command and display different
-        # colors in the prompt accordingly. 
-        if [ $? = 0 ]; then
-            local BG_EXIT="$BG_BLUE"
-        else
-            local BG_EXIT="$BG_RED"
-        fi
-
-        #PS1="$MAGENTA\u$RESET@$GREEN\h$RESET:$BLUE\w$ORANGE\$(__git_branch) $RESET$PS_SYM$RESET "
-        # Expand colors right away, but scape $ of the __git_ps1 function call
-        # so that it is evaluated when the prompt is printed instead of the 
-        # first time PS1 is defined. Otherwise you'll get a git branch in PS1
-        # which never changes.
-
-        PS1="$BG_GREEN$BASE2 \w $BG_BASE2$ORANGE\$(__git_branch)$BG_EXIT$BASE3 $PS_SYM $RESET "
-
-    }
-
-    export PROMPT_COMMAND=ps1
-
-    #if [ `which vimpager 2>/dev/null` ]; then
-    #    export PAGER=`which vimpager`
-    #    alias vless=$PAGER
-    #fi
-
-    it2bg() {
-        if [[ "$1" == l* ]]; then
-            echo -e "\033]50;SetProfile=Solarized Light\a"
-            export ITERM_PROFILE='Solarized Light'
-            export COLORFGBG='11;15'
-        elif [[ "$1" == d* ]]; then
-            echo -e "\033]50;SetProfile=Solarized Dark\a"
-            export ITERM_PROFILE='Solarized Dark'
-            export COLORFGBG='12;8'
-        else
-            echo "Usage: $FUNCNAME [dark|light]"
-        fi
-    }
 
     # zsh-style preexec function which execute before each command
-    preexec () { 
-        :;
-    }
+    #preexec () { 
+    #    :;
+    #}
 
-    preexec_invoke_exec () {
-        [ -n "$COMP_LINE" ] && return  # do nothing if completing
-        [ "$BASH_COMMAND" = "$PROMPT_COMMAND" ] && return # don't cause a preexec for $PROMPT_COMMAND
-        local this_command=`history 1 | sed -e "s/^[ ]*[0-9]*[ ]*//g"`;
-        preexec "$this_command"
-    }
-    trap 'preexec_invoke_exec' DEBUG
+    #preexec_invoke_exec () {
+    #    [ -n "$COMP_LINE" ] && return  # do nothing if completing
+    #    [ "$BASH_COMMAND" = "$PROMPT_COMMAND" ] && return # don't cause a preexec for $PROMPT_COMMAND
+    #    local this_command=`history 1 | sed -e "s/^[ ]*[0-9]*[ ]*//g"`;
+    #    preexec "$this_command"
+    #}
+    #trap 'preexec_invoke_exec' DEBUG
 
-else
-    : # non-interactive shell
+    [ -f ~/Projects/bash-powerline/bash-powerline.sh ] && source ~/Projects/bash-powerline/bash-powerline.sh
+    [ -f /etc/bash_completion ] && source /etc/bash_completion
+    [ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
 fi
