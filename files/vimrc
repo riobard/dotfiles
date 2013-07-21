@@ -42,6 +42,7 @@ try
     "Bundle 'jacekd/vim-iawriter'
     "Bundle 'laktek/distraction-free-writing-vim'
     Bundle 'kien/rainbow_parentheses.vim'
+    Bundle 'rking/ag.vim'
 
     " Vim-scripts repos
     Bundle 'surround.vim'
@@ -76,7 +77,7 @@ let g:Powerline_colorscheme = 'solarized16'
 
 """ Indentation
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab shiftround
-set autoindent copyindent smartindent
+set autoindent
 
 
 """ autoclose 
