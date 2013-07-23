@@ -3,14 +3,9 @@ if shopt -q login_shell ; then # login shell
     export LANGUAGE="en_US.UTF-8"
     export LC_ALL="en_US.UTF-8"
 
-    export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/python:/usr/local/share/npm/bin/:$PATH
-
-    if [ -n "$(which go)" ]; then
-        export GOROOT="$(go env GOROOT)"
-        #export PATH=$GOROOT/bin:$PATH
-        export GOPATH=~/go
-        export PATH=$PATH:~/go/bin
-    fi
+    export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/python:/usr/local/share/npm/bin/:$PATH
+    export GOPATH=$HOME/go
+    export PATH=$PATH:$GOPATH/bin
 
     [ -n "$(which vi)" ] && export EDITOR="$(which vi)"
 fi
