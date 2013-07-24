@@ -43,6 +43,7 @@ try
     "Bundle 'laktek/distraction-free-writing-vim'
     Bundle 'kien/rainbow_parentheses.vim'
     Bundle 'rking/ag.vim'
+    Bundle 'jnwhiteh/vim-golang'
 
     " Vim-scripts repos
     Bundle 'surround.vim'

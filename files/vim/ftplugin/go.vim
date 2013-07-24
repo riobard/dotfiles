@@ -1,7 +1,3 @@
-if !empty($GOROOT)
-    set rtp+=$GOROOT/misc/vim
-endif
-
 setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4 nolist
 
 augroup gofmt
