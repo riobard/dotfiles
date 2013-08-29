@@ -2,7 +2,7 @@ set nocompatible
 
 try
     filetype off        " required to use Vundle
-    set shell=/bin/bash\ -li " https://github.com/gmarik/vundle/issues/175
+    "set shell=/bin/bash\ -li " https://github.com/gmarik/vundle/issues/175
     "set shellcmdflag=-ic       " use an interactive login shell for $PATH
     set rtp+=~/.vim/bundle/vundle/
     call vundle#rc()
