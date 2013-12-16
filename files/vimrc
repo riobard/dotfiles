@@ -151,15 +151,13 @@ map <Esc>l <C-w>l
 set backspace=indent,eol,start
 
 
-""" Other convenient shortcuts
-" Map leader to ','.  The leader character is your own personal modifier key,
-" as g is Vim’s modifier key (when compared to vi). The default leader is \,
-" but this is not located standardly on all keyboards and requires a pinky
-" stretch in any case.
-let mapleader = ","
-" <SPACE> is also a good choice. Note: you can of course have several “
+" The leader character is your own personal modifier key, as g is Vim’s
+" modifier key (when compared to vi). The default leader is \, but this is not
+" located standardly on all keyboards and requires a pinky stretch in any
+" case.  <SPACE> is also a good choice. Note: you can of course have several “
 " personal modifier keys” simply by mapping a sequence, but the leader key is
 " handled more formally. 
+let mapleader = " "
 
 " speed up command typing by saving the shift to type ':'
 nnoremap ; :
@@ -234,7 +232,7 @@ endtry
 
 
 " Highlight text columns 81-400 to mark the 80 columns boundary. 
-let &colorcolumn=join(range(81,400),",")
+"let &colorcolumn=join(range(81,400),",")
 
 " ctermbg=232 is black, and 233 is slightly lighter than black.
 "hi ColorColumn ctermbg=233
@@ -307,9 +305,6 @@ set laststatus=2    " always show the status line
 " Use these symbols for invisible chars
 set listchars=tab:⇥\ ,trail:␣,eol:↩,nbsp:␣,extends:…,precedes:…
 
-" Use OS X clipboard
-set clipboard=unnamed
-
 " Set the terminal title.  A running gvim will always have a window title, but
 " when vim is run within an xterm, by default it inherits the terminal’s
 " current title.  This gives e.g. | page.html (~) - VIM |. 
@@ -356,6 +351,7 @@ set scrolloff=3
 
 
 
+set number
 if exists("+relativenumber")
     set relativenumber
 endif

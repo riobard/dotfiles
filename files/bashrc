@@ -4,7 +4,7 @@ if shopt -q login_shell ; then # login shell
     export LC_ALL="en_US.UTF-8"
 
     export GOPATH="$HOME/go"
-    export PATH="$GOPATH/bin:$HOME/bin:/usr/local/bin:/usr/local/share/python:/usr/local/share/npm/bin/:$PATH"
+    export PATH="$GOPATH/bin:$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH"
 
     [ -n "$(which vi)" ] && export EDITOR="$(which vi)"
 fi

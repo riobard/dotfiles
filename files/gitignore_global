@@ -13,6 +13,9 @@
 # Sass cache
 .sass-cache
 
+# Go test binaries
+.test
+
 
 # Compiled source #
 # ###################
