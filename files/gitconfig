@@ -5,6 +5,7 @@
 	excludesfile = ~/.gitignore_global
 [alias]
     co = checkout
+    st = status
 [color]
 	ui = auto
 [push]
