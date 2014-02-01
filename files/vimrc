@@ -31,7 +31,7 @@ try
     Bundle 'riobard/scala.vim'
     Bundle 'scrooloose/nerdtree'
     Bundle 'scrooloose/syntastic'
-    Bundle 'spolu/dwm.vim'
+    "Bundle 'spolu/dwm.vim'
     Bundle 'tomasr/molokai'
     Bundle 'tpope/vim-fugitive'
     Bundle 'tpope/vim-haml'

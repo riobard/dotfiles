@@ -5,6 +5,7 @@ if shopt -q login_shell ; then # login shell
 
     export GOPATH="$HOME/go"
     export PATH="$GOPATH/bin:$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH"
+    export PATH="$(go env GOROOT)/bin:$PATH"
 
     [ -n "$(which vi)" ] && export EDITOR="$(which vi)"
 fi
