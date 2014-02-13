@@ -1,13 +1,18 @@
 if shopt -q login_shell ; then # login shell
-    export LANG="UTF-8"
-    export LANGUAGE="en_US.UTF-8"
-    export LC_ALL="en_US.UTF-8"
+    export LANG=UTF-8
+    export LANGUAGE=en_US.UTF-8
+    export LC_ALL=en_US.UTF-8
 
-    export GOPATH="$HOME/go"
-    export PATH="$GOPATH/bin:$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH"
-    export PATH="$(go env GOROOT)/bin:$PATH"
+    export PATH=$HOME/bin:$HOME/go_appengine:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
+
+    if [ -n "$(which go)" ]; then
+        export GOPATH=$HOME/go
+        export PATH=$GOPATH/bin:$(go env GOROOT)/bin:$PATH
+    fi
 
     [ -n "$(which vi)" ] && export EDITOR="$(which vi)"
+
+    export DOCKER_HOST=localhost
 fi
 
 
@@ -17,7 +22,6 @@ if [ -n "$PS1" ]; then  # interactive-shell
     shopt -s cmdhist
     shopt -s lithist
 
-    # aliases
     alias ..="cd .."
     alias ...="cd ../.."
     alias ....="cd ../../.."
@@ -34,6 +38,7 @@ if [ -n "$PS1" ]; then  # interactive-shell
     alias py="python"
     alias tree="tree -C"
     alias vbox='VBoxManage'
+    alias dk=docker
 
     case "$(uname)" in 
         Darwin)
@@ -70,20 +75,21 @@ if [ -n "$PS1" ]; then  # interactive-shell
         }
     fi
 
-    # zsh-style preexec function which execute before each command
-    #preexec () { 
-    #    :;
-    #}
-
-    #preexec_invoke_exec () {
-    #    [ -n "$COMP_LINE" ] && return  # do nothing if completing
-    #    [ "$BASH_COMMAND" = "$PROMPT_COMMAND" ] && return # don't cause a preexec for $PROMPT_COMMAND
-    #    local this_command=`history 1 | sed -e "s/^[ ]*[0-9]*[ ]*//g"`;
-    #    preexec "$this_command"
-    #}
-    #trap 'preexec_invoke_exec' DEBUG
-
-    [ -f ~/Projects/bash-powerline/bash-powerline.sh ] && source ~/Projects/bash-powerline/bash-powerline.sh
     [ -f /etc/bash_completion ] && source /etc/bash_completion
     [ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
+    [ -f ~/Projects/bash-powerline/bash-powerline.sh ] && source ~/Projects/bash-powerline/bash-powerline.sh
+
+    # zsh-style preexec function which execute before each command
+    __preexec() { 
+        echo "($(date))"
+    }
+
+    __preexec_invoke_exec() {
+        [ -n "$COMP_LINE" ] && return  # do nothing if completing
+        [ "$BASH_COMMAND" = "$PROMPT_COMMAND" ] && return # don't cause a preexec for $PROMPT_COMMAND
+        local this_command=$(history 1 | sed -e "s/^[ ]*[0-9]*[ ]*//g")
+        __preexec "$this_command"
+    }
+    trap '__preexec_invoke_exec' DEBUG
+
 fi

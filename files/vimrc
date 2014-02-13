@@ -44,6 +44,7 @@ try
     Bundle 'kien/rainbow_parentheses.vim'
     Bundle 'rking/ag.vim'
     Bundle 'jnwhiteh/vim-golang'
+    Bundle 'honza/dockerfile.vim'
 
     " Vim-scripts repos
     Bundle 'surround.vim'
