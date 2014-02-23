@@ -12,7 +12,7 @@ if shopt -q login_shell ; then # login shell
 
     [ -n "$(which vi)" ] && export EDITOR="$(which vi)"
 
-    export DOCKER_HOST=localhost
+    export DOCKER_HOST=tcp://localhost:4243
 fi
 
 
@@ -37,8 +37,11 @@ if [ -n "$PS1" ]; then  # interactive-shell
     alias bpy="bpython"
     alias py="python"
     alias tree="tree -C"
-    alias vbox='VBoxManage'
-    alias dk=docker
+    alias dkr=docker
+    alias b2d=boot2docker
+    alias vbm=VBoxManage
+    alias airport="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport"
+    alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 
     case "$(uname)" in 
         Darwin)
@@ -77,7 +80,7 @@ if [ -n "$PS1" ]; then  # interactive-shell
 
     [ -f /etc/bash_completion ] && source /etc/bash_completion
     [ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
-    [ -f ~/Projects/bash-powerline/bash-powerline.sh ] && source ~/Projects/bash-powerline/bash-powerline.sh
+    [ -f ~/code/bash-powerline/bash-powerline.sh ] && source ~/code/bash-powerline/bash-powerline.sh
 
     # zsh-style preexec function which execute before each command
     __preexec() { 
