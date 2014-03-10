@@ -38,10 +38,11 @@ if [ -n "$PS1" ]; then  # interactive-shell
     alias py="python"
     alias tree="tree -C"
     alias dkr=docker
-    alias b2d=boot2docker
+    alias b2d=boot2docker-cli
     alias vbm=VBoxManage
     alias airport="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport"
     alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+    alias ssh="TERM=xterm-256color ssh"
 
     case "$(uname)" in 
         Darwin)

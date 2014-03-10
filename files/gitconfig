@@ -14,3 +14,6 @@
     # Force git to use SSH instead of HTTPS to talk to GitHub. This allows
     # `go get` to succeed with private GitHub repos. 
     insteadOf = https://github.com/
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f

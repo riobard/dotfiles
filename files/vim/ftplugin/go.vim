@@ -7,6 +7,11 @@ augroup gofmt
     " For more details see http://stackoverflow.com/questions/10969366/vim-automatically-formatting-golang-source-code-when-saving
 augroup END
 
+" Prefer goimports over gofmt
+if system("which goimports") != ""
+    let g:gofmt_command = "goimports"
+endif
+
 
 " tagbar with gotags https://github.com/jstemmer/gotags
 let g:tagbar_type_go = {
