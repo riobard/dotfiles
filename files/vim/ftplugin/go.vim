@@ -1,11 +1,11 @@
 setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4 nolist
 
-augroup gofmt
-    autocmd!
-    "autocmd BufWritePre <buffer> Fmt
-    autocmd BufWritePre *.go Fmt
-    " For more details see http://stackoverflow.com/questions/10969366/vim-automatically-formatting-golang-source-code-when-saving
-augroup END
+" run golint on save
+"set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+"autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
+
+" run gofmt on save. (deprecated. gocode plugin does this already)
+"autocmd FileType go autocmd BufWritePre <buffer> Fmt
 
 " Prefer goimports over gofmt
 if system("which goimports") != ""

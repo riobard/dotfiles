@@ -23,7 +23,9 @@ try
     Bundle 'tpope/vim-haml'
     Bundle 'tpope/vim-markdown'
     Bundle 'uarun/vim-protobuf'
-    Bundle 'jnwhiteh/vim-golang'
+    "Bundle 'jnwhiteh/vim-golang'
+    "Bundle 'Blackrush/vim-gocode'
+    Bundle 'riobard/vim-gocode'
     Bundle 'nelstrom/vim-markdown-folding'
     Bundle 'nelstrom/vim-mac-classic-theme'
     Bundle 'riobard/scala.vim'
@@ -40,6 +42,7 @@ try
     Bundle 'tommcdo/vim-exchange'
     Bundle 'tpope/vim-repeat'
     Bundle 'surround.vim'
+    "Bundle 'ervandew/supertab'
 
     Bundle 'ap/vim-css-color'
     "Bundle 'jacekd/vim-iawriter'
@@ -367,6 +370,8 @@ set scrolloff=3
 " Typing zz is also handy; it centers the window on the cursor without moving
 " the cursor. (But watch out for ZZ!) 
 
+" Make mouse scrolling work
+set mouse=a
 
 
 set number
