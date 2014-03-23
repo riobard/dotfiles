@@ -8,86 +8,81 @@ try
     call vundle#rc()
 
     " let Vundle manage Vundle (required!)
-    Bundle 'gmarik/vundle'
+    Plugin 'gmarik/vundle'
 
-    " colorschemes "
-    Bundle 'altercation/vim-colors-solarized'
-    "Bundle 'nanotech/jellybeans.vim'
-    "Bundle 'riobard/vim-cute-python'
-    "Bundle 'sickill/vim-monokai'
-    "Bundle 'tpope/vim-vividchalk'
-    "Bundle 'tomasr/molokai'
-    
-    
-    " enhanced file formats "
-    Bundle 'tpope/vim-haml'
-    Bundle 'tpope/vim-markdown'
-    Bundle 'uarun/vim-protobuf'
-    "Bundle 'jnwhiteh/vim-golang'
-    "Bundle 'Blackrush/vim-gocode'
-    Bundle 'riobard/vim-gocode'
-    Bundle 'nelstrom/vim-markdown-folding'
-    Bundle 'nelstrom/vim-mac-classic-theme'
-    Bundle 'riobard/scala.vim'
-    Bundle 'honza/dockerfile.vim'
-    Bundle 'nginx.vim'
-    Bundle 'cocoa.vim'
-    Bundle 'applescript.vim'
-    Bundle 'httplog'
-    Bundle 'vim-json-bundle'
-    Bundle 'kchmck/vim-coffee-script'
-    Bundle 'adimit/prolog.vim'
+    " colorschemes
+    Plugin 'altercation/vim-colors-solarized'
+    "Plugin 'nanotech/jellybeans.vim'
+    "Plugin 'sickill/vim-monokai'
+    "Plugin 'tpope/vim-vividchalk'
+    "Plugin 'tomasr/molokai'
+    "Plugin 'nelstrom/vim-mac-classic-theme'
 
-    " enchaned Vim operations "
-    Bundle 'tommcdo/vim-exchange'
-    Bundle 'tpope/vim-repeat'
-    Bundle 'surround.vim'
-    "Bundle 'ervandew/supertab'
+    " enhanced file formats
+    Plugin 'tpope/vim-haml'
+    Plugin 'tpope/vim-markdown'
+    "Plugin 'nelstrom/vim-markdown-folding'
+    "Plugin 'plasticboy/vim-markdown'
+    Plugin 'uarun/vim-protobuf'
+    Plugin 'Blackrush/vim-gocode'
+    Plugin 'riobard/scala.vim'
+    Plugin 'honza/dockerfile.vim'
+    Plugin 'nginx.vim'
+    Plugin 'cocoa.vim'
+    Plugin 'applescript.vim'
+    Plugin 'httplog'
+    Plugin 'vim-json-bundle'
+    Plugin 'kchmck/vim-coffee-script'
+    Plugin 'adimit/prolog.vim'
 
-    Bundle 'ap/vim-css-color'
-    "Bundle 'jacekd/vim-iawriter'
-    "Bundle 'laktek/distraction-free-writing-vim'
-    Bundle 'kien/rainbow_parentheses.vim'
+    " enchaned Vim operations
+    Plugin 'tommcdo/vim-exchange'
+    Plugin 'tpope/vim-repeat'
+    Plugin 'surround.vim'
+    "Plugin 'ervandew/supertab'
 
-    " app integration "
-    Bundle 'jpalardy/vim-slime'
-    Bundle 'tpope/vim-fugitive'
-    Bundle 'rking/ag.vim'
-    Bundle 'mileszs/ack.vim'
-    Bundle 'rizzatti/funcoo.vim'
-    Bundle 'rizzatti/dash.vim'
+    Plugin 'ap/vim-css-color'
+    "Plugin 'jacekd/vim-iawriter'
+    "Plugin 'laktek/distraction-free-writing-vim'
+    Plugin 'kien/rainbow_parentheses.vim'
+
+    " app integration
+    Plugin 'jpalardy/vim-slime'
+    Plugin 'tpope/vim-fugitive'
+    Plugin 'rking/ag.vim'
+    Plugin 'mileszs/ack.vim'
+    Plugin 'rizzatti/funcoo.vim'
+    Plugin 'rizzatti/dash.vim'
 
     " misc
-    Bundle 'Lokaltog/vim-powerline'
-    Bundle 'Townk/vim-autoclose'
-    Bundle 'kien/ctrlp.vim'
-    Bundle 'majutsushi/tagbar'
-    Bundle 'msanders/snipmate.vim'
-    Bundle 'scrooloose/nerdtree'
-    Bundle 'scrooloose/syntastic'
-    "Bundle 'spolu/dwm.vim'
-    Bundle 'matchit.zip'
-    Bundle 'DrawIt'
-    Bundle 'godlygeek/tabular'
+    "Plugin 'riobard/vim-cute-python'
+    Plugin 'bling/vim-airline'
+    Plugin 'Townk/vim-autoclose'
+    Plugin 'kien/ctrlp.vim'
+    Plugin 'majutsushi/tagbar'
+    Plugin 'msanders/snipmate.vim'
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'scrooloose/syntastic'
+    "Plugin 'spolu/dwm.vim'
+    Plugin 'matchit.zip'
+    Plugin 'DrawIt'
+    Plugin 'godlygeek/tabular'
+    "Plugin 'terryma/vim-expand-region'
 catch /E117:/
     " Vundle is not available
 endtry
 
 filetype plugin indent on   " required by Vundle
 
-" Powerline options seem to only work in .vimrc. Binding too late has no
-" effect. Fancy symbols require patched font to render properly.  Both
-" `unicode` and `fancy` options introduce a start delay on OS X, possibly due
-" to font fallback mechanism.  See issue #163:
-" https://github.com/Lokaltog/vim-powerline/issues/163
-"let g:Powerline_symbols = 'unicode'
-"let g:Powerline_symbols = 'fancy'
-"let g:Powerline_symbols = 'compatible'
-" FIXME symbol override does not work with default theme/colorscheme, but use
-" other theme/colorscheme introduces a long startup delay
-let g:Powerline_symbols_override = { 'BRANCH': '⑂', 'LINE': '' }
-"let g:Powerline_theme = 'default'
-let g:Powerline_colorscheme = 'solarized16'
+
+set laststatus=2    " always show the status line
+""" airline config
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.branch='⑂'
 
 
 
@@ -96,7 +91,7 @@ set tabstop=4 softtabstop=4 shiftwidth=4 expandtab shiftround
 set autoindent
 
 
-""" autoclose 
+""" autoclose
 "let g:AutoCloseProtectedRegions = []
 "let g:AutoCloseProtectedRegions = ["Comment", "String", "Character"]
 
@@ -153,8 +148,8 @@ nmap <D-6> g^
 nmap <D-0> g0
 
 " Switch between split panels
-" Note: we use Option key as prefix. iTerm 2 sends Option key as +Esc. Meta 
-" doesn't work properly. 
+" Note: we use Option key as prefix. iTerm 2 sends Option key as +Esc. Meta
+" doesn't work properly.
 map <Esc>j <C-w>j
 map <Esc>k <C-w>k
 map <Esc>h <C-w>h
@@ -171,8 +166,19 @@ set backspace=indent,eol,start
 " located standardly on all keyboards and requires a pinky stretch in any
 " case.  <SPACE> is also a good choice. Note: you can of course have several “
 " personal modifier keys” simply by mapping a sequence, but the leader key is
-" handled more formally. 
+" handled more formally.
 let mapleader = " "
+
+
+" System clipboard shorcut
+vmap <leader>y "+y
+vmap <leader>Y "+Y
+vmap <leader>d "+d
+vmap <leader>D "+D
+vmap <leader>p "+p
+vmap <leader>P "+P
+nmap <leader>p "+p
+nmap <leader>P "+P
 
 " speed up command typing by saving the shift to type ':'
 nnoremap ; :
@@ -193,8 +199,6 @@ map <S-Tab> :tabprev<CR>
 
 
 map <leader>t :NERDTree\|TagbarToggle<CR>
-com TT NERDTree | TagbarToggle
-
 
 "  use w!! to 'sudo' save after you opened the file without 'sudo' first
 cmap w!! w !sudo tee % >/dev/null
@@ -202,9 +206,6 @@ cmap w!! w !sudo tee % >/dev/null
 
 " Toggle `set list` to show invisible chars
 nmap <leader>l :set list!<CR>
-
-" Toggle paste mode
-nmap <leader>p :set paste!<CR>
 
 
 " clear search highlights easily
@@ -246,13 +247,13 @@ endtry
 "silent! colo molokai
 
 
-" Use italic font for comments in terminal. Need to 
+" Use italic font for comments in terminal. Need to
 "
 "     export TERM=xterm-256color-italic
 hi Comment cterm=italic
 
 
-" Highlight text columns 81-400 to mark the 80 columns boundary. 
+" Highlight text columns 81-400 to mark the 80 columns boundary.
 "let &colorcolumn=join(range(81,400),",")
 
 " ctermbg=232 is black, and 233 is slightly lighter than black.
@@ -311,27 +312,17 @@ nmap Q gqap
 set fo+=mMn
 
 
-""" status line
-" Enable limited line numbering
-" It’s often useful to know where you are in a buffer, but full line 
-" numbering is distracting. Setting the option below is a good compromise:
-"set ruler
-" Now in the bottom right corner of the status line there will be something 
-" like: 529, 35 68%, representing line 529, column 35, about 68% of the way to
-" the end. 
 
-set laststatus=2    " always show the status line
-"set statusline=%{fugitive#statusline()}\ %<%F\ %y%h%m%r%=%-14.(%l,%c%V%)\ [%P/%L]
 
 " Use these symbols for invisible chars
 set listchars=tab:⇥\ ,trail:␣,eol:↩,nbsp:␣,extends:…,precedes:…
 
 " Set the terminal title.  A running gvim will always have a window title, but
 " when vim is run within an xterm, by default it inherits the terminal’s
-" current title.  This gives e.g. | page.html (~) - VIM |. 
+" current title.  This gives e.g. | page.html (~) - VIM |.
 set title titlestring=%<%F
 
-" Silent mode. No beeping. 
+" Silent mode. No beeping.
 set visualbell noerrorbells
 
 " Read 5 lines as modelines
@@ -349,9 +340,9 @@ set fileformat=unix fileformats=unix,dos,mac
 set showmatch     " set show matching parenthesis
 
 " Turn on hidden.  Don’t worry about the name. What this does is allow Vim to
-" manage multiple buffers effectively.  
-" * The current buffer can be put to the background without writing to disk; 
-" * When a background buffer becomes current again, marks and undo-history 
+" manage multiple buffers effectively.
+" * The current buffer can be put to the background without writing to disk;
+" * When a background buffer becomes current again, marks and undo-history
 " are remembered.
 set hidden
 
@@ -368,7 +359,7 @@ set undolevels=1000      " use many levels of undo
 " border, keeping more context around where you’re working.
 set scrolloff=3
 " Typing zz is also handy; it centers the window on the cursor without moving
-" the cursor. (But watch out for ZZ!) 
+" the cursor. (But watch out for ZZ!)
 
 " Make mouse scrolling work
 set mouse=a
@@ -386,13 +377,13 @@ endif
 " command-line text and other info tokens with, e.g.:
 set shortmess=atI
 " See :help shortmess for the breakdown of what this changes. You can also
-" pare things down further if you like. 
+" pare things down further if you like.
 
 
 
 " Trigger tag auto hightlight every second. Note this is done by writing swap
 " file to trigger the CursorHold event. Low values will incur more disk I/O.
-set updatetime=1000 
+set updatetime=1000
 
 
 " show softwarpped continuing line
@@ -430,6 +421,9 @@ if exists(":Tabularize")
     "vmap <Leader>a: :Tabularize /:\zs<CR>
 endif
 
+"vmap v <Plug>(expand_region_expand)
+"vmap <C-v> <Plug>(expand_region_shrink)
+
 
 """ Syntastic plugin
 let g:syntastic_python_checkers=['flake8']
@@ -448,16 +442,12 @@ let NERDTreeIgnore=['\.pyc', '\.pyo']
 
 
 """ Rainbow plugin https://github.com/kien/rainbow_parentheses.vim
-function s:load_rainbow_parentheses()
-    if exists(':RainbowParenthesesToggle')
-        au Syntax * RainbowParenthesesLoadRound
-        au Syntax * RainbowParenthesesLoadSquare
-        au Syntax * RainbowParenthesesLoadBraces
-        RainbowParenthesesToggle
-    endif
-endfunction
-
-au VimEnter * :call s:load_rainbow_parentheses()
+if exists(':RainbowParenthesesToggle')
+    au VimEnter * RainbowParenthesesToggle
+    au Syntax * RainbowParenthesesLoadRound     " ()
+    au Syntax * RainbowParenthesesLoadSquare    " []
+    au Syntax * RainbowParenthesesLoadBraces    " {}
+endif
 
 
 """ GUI
@@ -473,7 +463,8 @@ if has("gui_running")
     if has("gui_macvim")
         "set guifont=Monaco:h12
         "set guifont=Menlo:h11
-        set guifont=Source\ Code\ Pro:h11
+        "set guifont=Source\ Code\ Pro:h11
+        set guifont=Consolas:h11
 
         " Enable meta- kind binding for GUI
         set macmeta
