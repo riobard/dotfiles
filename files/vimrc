@@ -24,21 +24,22 @@ try
     "Plugin 'nelstrom/vim-markdown-folding'
     "Plugin 'plasticboy/vim-markdown'
     Plugin 'uarun/vim-protobuf'
-    Plugin 'Blackrush/vim-gocode'
+    "Plugin 'Blackrush/vim-gocode'
+    Plugin 'fatih/vim-go'
     Plugin 'riobard/scala.vim'
     Plugin 'honza/dockerfile.vim'
-    Plugin 'nginx.vim'
-    Plugin 'cocoa.vim'
-    Plugin 'applescript.vim'
-    Plugin 'httplog'
-    Plugin 'vim-json-bundle'
+    Plugin 'elzr/vim-json'
     Plugin 'kchmck/vim-coffee-script'
     Plugin 'adimit/prolog.vim'
+    Plugin 'pangloss/vim-javascript'
+    Plugin 'mxw/vim-jsx'     " depends on pangloss/vim-javascript
+    Plugin 'LaTeX-Box-Team/LaTeX-Box'
 
     " enchaned Vim operations
     Plugin 'tommcdo/vim-exchange'
     Plugin 'tpope/vim-repeat'
-    Plugin 'surround.vim'
+    Plugin 'tpope/vim-surround'
+
     "Plugin 'ervandew/supertab'
 
     Plugin 'ap/vim-css-color'
@@ -53,6 +54,11 @@ try
     Plugin 'mileszs/ack.vim'
     Plugin 'rizzatti/funcoo.vim'
     Plugin 'rizzatti/dash.vim'
+    "Plugin 'Valloric/YouCompleteMe'
+    
+    " Snippets
+    Plugin 'SirVer/ultisnips'
+    Plugin 'honza/vim-snippets'
 
     " misc
     "Plugin 'riobard/vim-cute-python'
@@ -60,12 +66,11 @@ try
     Plugin 'Townk/vim-autoclose'
     Plugin 'kien/ctrlp.vim'
     Plugin 'majutsushi/tagbar'
-    Plugin 'msanders/snipmate.vim'
     Plugin 'scrooloose/nerdtree'
     Plugin 'scrooloose/syntastic'
     "Plugin 'spolu/dwm.vim'
-    Plugin 'matchit.zip'
-    Plugin 'DrawIt'
+    Plugin 'tmhedberg/matchit'
+    "Plugin 'DrawIt'
     Plugin 'godlygeek/tabular'
     "Plugin 'terryma/vim-expand-region'
 catch /E117:/
@@ -85,10 +90,28 @@ endif
 let g:airline_symbols.branch='⑂'
 
 
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_javascript_checkers = ['jsxhint']
+
+""" Conceal
+set conceallevel=2 concealcursor=nc
+let g:javascript_conceal_function   = 'λ'
+let g:javascript_conceal_return     = '↩'
+let g:javascript_conceal_this       = '@'
+"let g:javascript_conceal_null       = 'ø'
+"let g:javascript_conceal_undefined  = '¿'
+"let g:javascript_conceal_NaN        = 'ℕ'
+"let g:javascript_conceal_prototype  = '¶'
 
 """ Indentation
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab shiftround
 set autoindent
+
+
+""" UltiSnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 
 """ autoclose
@@ -167,7 +190,8 @@ set backspace=indent,eol,start
 " case.  <SPACE> is also a good choice. Note: you can of course have several “
 " personal modifier keys” simply by mapping a sequence, but the leader key is
 " handled more formally.
-let mapleader = " "
+let mapleader = ' '
+let maplocalleader = ','
 
 
 " System clipboard shorcut
@@ -179,6 +203,15 @@ vmap <leader>p "+p
 vmap <leader>P "+P
 nmap <leader>p "+p
 nmap <leader>P "+P
+
+
+" speed up commone operations
+nmap <leader>e :e 
+nmap <leader>w :w<Enter>
+nmap <leader>q :q<Enter>
+
+" jump to next quixfix error in location list
+nmap <leader>f :lnext<Enter>
 
 " speed up command typing by saving the shift to type ':'
 nnoremap ; :
@@ -290,8 +323,8 @@ set ignorecase smartcase
 """ folding
 set foldlevelstart=0
 " toggle current fold
-nnoremap <space> za
-vnoremap <space> za
+"nnoremap <space> za
+"vnoremap <space> za
 
 " Make zO recursively open whatever top level fold we're in, no matter where the
 " cursor happens to be.
@@ -480,3 +513,12 @@ if has("gui_running")
         endif
     endif
 endif
+
+
+
+""""" Go shortcuts
+au Filetype go nnoremap <leader>i :GoInstall<CR>
+au Filetype go nnoremap <leader>r :GoRun<CR>
+au Filetype go nnoremap <leader>v :vsp <CR>:exe "GoDef" <CR>
+au Filetype go nnoremap <leader>s :sp <CR>:exe "GoDef"<CR>
+au Filetype go nnoremap <leader>t :tab split <CR>:exe "GoDef"<CR>

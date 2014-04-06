@@ -94,6 +94,6 @@ if [ -n "$PS1" ]; then  # interactive-shell
         local this_command=$(history 1 | sed -e "s/^[ ]*[0-9]*[ ]*//g")
         __preexec "$this_command"
     }
-    trap '__preexec_invoke_exec' DEBUG
+    #trap '__preexec_invoke_exec' DEBUG
 
 fi
