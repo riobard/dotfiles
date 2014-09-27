@@ -1,20 +1,18 @@
 set nocompatible
+filetype off        " required to use Vundle
 
 try
-    filetype off        " required to use Vundle
-    "set shell=/bin/bash\ -li " https://github.com/gmarik/vundle/issues/175
-    "set shellcmdflag=-ic       " use an interactive login shell for $PATH
-    set rtp+=~/.vim/bundle/vundle/
-    call vundle#rc()
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
 
     " let Vundle manage Vundle (required!)
-    Plugin 'gmarik/vundle'
+    Plugin 'gmarik/Vundle.vim'
 
     " colorschemes
     Plugin 'altercation/vim-colors-solarized'
     "Plugin 'nanotech/jellybeans.vim'
     "Plugin 'sickill/vim-monokai'
-    "Plugin 'tpope/vim-vividchalk'
+    Plugin 'tpope/vim-vividchalk'
     "Plugin 'tomasr/molokai'
     "Plugin 'nelstrom/vim-mac-classic-theme'
 
@@ -34,6 +32,7 @@ try
     Plugin 'pangloss/vim-javascript'
     Plugin 'mxw/vim-jsx'     " depends on pangloss/vim-javascript
     Plugin 'LaTeX-Box-Team/LaTeX-Box'
+    Plugin 'groenewege/vim-less'
 
     " enchaned Vim operations
     Plugin 'tommcdo/vim-exchange'
@@ -55,9 +54,9 @@ try
     Plugin 'rizzatti/funcoo.vim'
     Plugin 'rizzatti/dash.vim'
     "Plugin 'Valloric/YouCompleteMe'
-    
+
     " Snippets
-    Plugin 'SirVer/ultisnips'
+    Plugin 'SirVer/ultisnips'   " requires +python support
     Plugin 'honza/vim-snippets'
 
     " misc
@@ -73,12 +72,13 @@ try
     "Plugin 'DrawIt'
     Plugin 'godlygeek/tabular'
     "Plugin 'terryma/vim-expand-region'
+    
+    call vundle#end()
 catch /E117:/
     " Vundle is not available
 endtry
 
 filetype plugin indent on   " required by Vundle
-
 
 set laststatus=2    " always show the status line
 """ airline config
@@ -206,12 +206,14 @@ nmap <leader>P "+P
 
 
 " speed up commone operations
-nmap <leader>e :e 
-nmap <leader>w :w<Enter>
-nmap <leader>q :q<Enter>
+nmap <leader>e :e
+nmap <leader>w :w<CR>
+nmap <leader>q :q<CR>
+nmap <leader><Tab> :tabnew<CR>
 
 " jump to next quixfix error in location list
 nmap <leader>f :lnext<Enter>
+nmap <leader>F :lprevious<Enter>
 
 " speed up command typing by saving the shift to type ':'
 nnoremap ; :
@@ -247,13 +249,19 @@ nmap <leader>/ :nohl<CR>
 
 
 """ Syntax highlighting
-syntax enable   " enable syntax highlighting
+syntax enable " enable syntax highlighting
 
 set t_Co=256    " Use 256 colors to display correctly in console
 "set background=dark " better to use COLORFGBG env var to auto set
 
 "" Solarized color scheme and my tweaks
-silent! colo solarized
+
+if match($ITERM_PROFILE, 'Solarized-') >= 0 || has('gui_running')
+    silent! colo solarized
+else
+    silent! colo vividchalk
+endif
+
 try
     if g:colors_name == 'solarized'
         if &background == 'dark'
@@ -321,7 +329,7 @@ set ignorecase smartcase
 
 
 """ folding
-set foldlevelstart=0
+"set foldlevelstart=-1
 " toggle current fold
 "nnoremap <space> za
 "vnoremap <space> za
@@ -513,12 +521,3 @@ if has("gui_running")
         endif
     endif
 endif
-
-
-
-""""" Go shortcuts
-au Filetype go nnoremap <leader>i :GoInstall<CR>
-au Filetype go nnoremap <leader>r :GoRun<CR>
-au Filetype go nnoremap <leader>v :vsp <CR>:exe "GoDef" <CR>
-au Filetype go nnoremap <leader>s :sp <CR>:exe "GoDef"<CR>
-au Filetype go nnoremap <leader>t :tab split <CR>:exe "GoDef"<CR>

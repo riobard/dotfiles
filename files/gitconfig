@@ -7,14 +7,16 @@
     co = checkout
     st = status
     br = branch
+    ds = describe
+    cm = commit
 [color]
 	ui = auto
 [push]
 	default = simple
 [url "git@github.com:"]
     # Force git to use SSH instead of HTTPS to talk to GitHub. This allows
-    # `go get` to succeed with private GitHub repos. 
-    insteadOf = https://github.com/
+    # `go get` private GitHub repos. 
+    #insteadOf = https://github.com/
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f

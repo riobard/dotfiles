@@ -1,0 +1,159 @@
+export LANGUAGE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+export PATH=$HOME/bin:$HOME/go_appengine:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
+
+if [ -n "$(which go)" ]; then
+    export GOPATH=$HOME/go
+    export PATH=$GOPATH/bin:$(go env GOROOT)/bin:$PATH
+fi
+
+[ -n "$(which vi)" ] && export EDITOR="$(which vi)"
+
+export PYTHONIOENCODING=utf-8
+export DOCKER_HOST=tcp://localhost:4243
+
+bindkey -e
+
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ll="ls -lh"
+alias la="ls -ha"
+alias lla="ls -lha"
+alias grep="grep --color=auto"
+alias egrep="egrep --color=auto"
+alias g="git add -A"
+alias gg="git add -A && git commit"
+alias ggg="git add -A && git commit && git push"
+alias ipy="ipython"
+alias bpy="bpython"
+alias py="python"
+alias tree="tree -C"
+alias dkr=docker
+alias b2d=boot2docker-cli
+alias vbm=VBoxManage
+alias airport="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport"
+alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+alias ssh="TERM=xterm-256color ssh"
+
+case "$(uname)" in
+    Darwin)
+        # color ls output
+        export CLICOLOR=1
+        alias l="ls -CF"
+        ;;
+    Linux)
+        alias ls="ls --color=auto"
+        alias l="ls -CF --hide=*.pyc"
+        ;;
+    *)
+esac
+
+
+autoload -U colors && colors
+autoload -U zutil
+autoload -U complist
+autoload -U compinit && compinit
+autoload -U promptinit && promptinit
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+zstyle ':completion:*' completer _complete _correct _complete:foo
+zstyle ':completion:*:complete:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*:foo:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|[-_./]=* r:|=*'
+
+
+export HISTSIZE=10000
+export SAVEHIST=$HISTSIZE
+export HISTFILE=$HOME/.zsh_history
+setopt hist_ignore_all_dups
+#setopt share_history
+
+setopt autocd
+setopt correct
+#setopt correctall
+
+
+readonly GIT_BRANCH_SYMBOL='⑂ '
+readonly GIT_BRANCH_CHANGED_SYMBOL='+'
+readonly GIT_NEED_PUSH_SYMBOL='⇡'
+readonly GIT_NEED_PULL_SYMBOL='⇣'
+
+readonly PS_SYMBOL_DARWIN=''
+readonly PS_SYMBOL_LINUX='$'
+readonly PS_SYMBOL_OTHER='%'
+
+# Assign prompt symbol based on OS
+case "$(uname)" in
+    Darwin)
+        readonly PS_SYMBOL=$PS_SYMBOL_DARWIN
+        ;;
+    Linux)
+        readonly PS_SYMBOL=$PS_SYMBOL_LINUX
+        ;;
+    *)
+        readonly PS_SYMBOL=$PS_SYMBOL_OTHER
+        ;;
+esac
+
+__git_info() {
+    [ -x "$(which git)" ] || return    # git not found
+
+    # get current branch name or short SHA1 hash for detached head
+    local branch="$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --always 2>/dev/null)"
+    [ -n "$branch" ] || return  # git branch not found
+
+    local marks
+
+    # branch is modified?
+    [ -n "$(git status --porcelain)" ] && marks+=" $GIT_BRANCH_CHANGED_SYMBOL"
+
+    # how many commits local branch is ahead/behind of remote?
+    local stat="$(git status --porcelain --branch | grep '^##' | grep -o '\[.\+\]$')"
+    local aheadN="$(echo $stat | grep -o 'ahead \d\+' | grep -o '\d\+')"
+    local behindN="$(echo $stat | grep -o 'behind \d\+' | grep -o '\d\+')"
+    [ -n "$aheadN" ] && marks+=" $GIT_NEED_PUSH_SYMBOL$aheadN"
+    [ -n "$behindN" ] && marks+=" $GIT_NEED_PULL_SYMBOL$behindN"
+
+    # print the git branch segment without a trailing newline
+    printf " $GIT_BRANCH_SYMBOL$branch$marks "
+}
+
+
+__config_prompt() {
+    # Color coding based on exit code of the previous command.  Note this must
+    # be dealt with in the beginning of the function, otherwise the $? will not
+    # match the right command executed.
+    if [ $? -eq 0 ]
+    then
+        local EXIT="%{$bg[green]%}"
+    else
+        local EXIT="%{$bg[red]%}"
+    fi
+
+    local RESET="%{${reset_color}%}"
+    local SYMBOL="%{$fg[white]%}$EXIT $PS_SYMBOL $RESET"
+    local GIT="%{$bg[blue]%}%{$fg[white]%}$(__git_info)$RESET"
+    local PATH="%{$bg[black]%}%{$fg[white]%} %~ $RESET"
+    local TIME="%{$fg[green]%}$(/bin/date -u '+%Y-%m-%d %H:%M:%S')$RESET"
+
+    PROMPT="$PATH$GIT$SYMBOL "
+    RPROMPT="$TIME"
+}
+
+precmd() {
+    __config_prompt
+}
+
+preexec() {
+}
+
+
+source /usr/local/opt/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down

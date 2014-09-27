@@ -1,23 +1,8 @@
-snippet package
-	package ${1}
-
-	import (
-		${2}
-	)
-
-	${3}
-
-
-snippet func
+snippet f
 	func ${1}(${2}) ${3} {
 		${4}
 	}
 
-
-snippet import
-	import (
-		"${1}"
-	)
 
 
 snippet switch
@@ -39,3 +24,6 @@ snippet iferr
 		return
 	}
 
+snippet hf
+	func ${1}(w http.ResponseWriter, r *http.Request) {
+	}

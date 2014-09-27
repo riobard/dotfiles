@@ -1,46 +1,7 @@
 setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4 nolist
 
-" run golint on save
-"set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
-"autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
-
-" run gofmt on save. (deprecated. gocode plugin does this already)
-"autocmd FileType go autocmd BufWritePre <buffer> Fmt
-
 " Prefer goimports over gofmt
-if system("which goimports") != ""
-    let g:gofmt_command = "goimports"
-endif
-
-
-" tagbar with gotags https://github.com/jstemmer/gotags
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-    \ }
+let g:go_fmt_command = "goimports"
 
 
 setlocal foldmethod=syntax
@@ -57,4 +18,13 @@ function! GoFoldText()
     return indent.line.sizeTxt
 endfunction
 
-setlocal foldtext=GoFoldText()
+setlocal foldtext=GoFoldText() nofoldenable
+
+
+nnoremap <localleader>d :tab split <CR>:exe "GoDef"<CR>
+nnoremap <localleader>ds :sp <CR>:exe "GoDef"<CR>
+nnoremap <localleader>dv :vsp <CR>:exe "GoDef" <CR>
+
+nnoremap <localleader>i :GoInstall<CR>
+nnoremap <localleader>r :GoRun<CR>
+nnoremap <localleader>t :GoTest<CR>
