@@ -33,6 +33,7 @@ try
     Plugin 'mxw/vim-jsx'     " depends on pangloss/vim-javascript
     Plugin 'LaTeX-Box-Team/LaTeX-Box'
     Plugin 'groenewege/vim-less'
+    Plugin 'evanmiller/nginx-vim-syntax'
 
     " enchaned Vim operations
     Plugin 'tommcdo/vim-exchange'
