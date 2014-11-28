@@ -1,19 +1,29 @@
 export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-export PATH=$HOME/bin:$HOME/go_appengine:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
+## Zsh automatically keeps $path and $PATH in sync. $path is an array.
+path=(
+    ~/bin
+    /usr/local/bin
+    /usr/local/sbin
+    /usr/local/share/npm/bin
+    $path)
 
-if [ -n "$(which go)" ]; then
+if [ -x $(which go) ]; then
     export GOPATH=$HOME/go
-    export PATH=$GOPATH/bin:$(go env GOROOT)/bin:$PATH
+    path=($GOPATH/bin
+        $(go env GOROOT)/bin
+        $path)
 fi
 
-[ -n "$(which vi)" ] && export EDITOR="$(which vi)"
-
+export EDITOR=vi
 export PYTHONIOENCODING=utf-8
 export DOCKER_HOST=tcp://localhost:4243
 
-bindkey -e
+
+## Keybinding. If unspecified, infer from $EDITOR env var
+#bindkey -e    # Emacs
+bindkey -v
 
 
 alias ..="cd .."
@@ -53,16 +63,20 @@ case "$(uname)" in
 esac
 
 
+fpath=(/usr/local/share/zsh/site-functions /usr/local/share/zsh-completions $fpath)
+
 autoload -U colors && colors
 autoload -U zutil
 autoload -U complist
 autoload -U compinit && compinit
 autoload -U promptinit && promptinit
-fpath=(/usr/local/share/zsh-completions $fpath)
 
 zstyle ':completion:*' completer _complete _correct _complete:foo
 zstyle ':completion:*:complete:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*:foo:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|[-_./]=* r:|=*'
+
+# Deprecated Golang's official Zsh completion. Will be gone in Go 1.4
+source /usr/local/share/zsh/site-functions/_go
 
 
 export HISTSIZE=10000

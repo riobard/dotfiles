@@ -18,16 +18,16 @@ try
 
     " enhanced file formats
     Plugin 'tpope/vim-haml'
-    Plugin 'tpope/vim-markdown'
+    "Plugin 'tpope/vim-markdown'
     "Plugin 'nelstrom/vim-markdown-folding'
-    "Plugin 'plasticboy/vim-markdown'
-    Plugin 'uarun/vim-protobuf'
+    Plugin 'plasticboy/vim-markdown'
+    "Plugin 'uarun/vim-protobuf'
     "Plugin 'Blackrush/vim-gocode'
     Plugin 'fatih/vim-go'
-    Plugin 'riobard/scala.vim'
+    "Plugin 'riobard/scala.vim'
     Plugin 'honza/dockerfile.vim'
     Plugin 'elzr/vim-json'
-    Plugin 'kchmck/vim-coffee-script'
+    "Plugin 'kchmck/vim-coffee-script'
     Plugin 'adimit/prolog.vim'
     Plugin 'pangloss/vim-javascript'
     Plugin 'mxw/vim-jsx'     " depends on pangloss/vim-javascript
@@ -43,15 +43,16 @@ try
     "Plugin 'ervandew/supertab'
 
     Plugin 'ap/vim-css-color'
+    Plugin 'hail2u/vim-css3-syntax'
     "Plugin 'jacekd/vim-iawriter'
     "Plugin 'laktek/distraction-free-writing-vim'
     Plugin 'kien/rainbow_parentheses.vim'
 
     " app integration
-    Plugin 'jpalardy/vim-slime'
+    "Plugin 'jpalardy/vim-slime'
     Plugin 'tpope/vim-fugitive'
     Plugin 'rking/ag.vim'
-    Plugin 'mileszs/ack.vim'
+    "Plugin 'mileszs/ack.vim'
     Plugin 'rizzatti/funcoo.vim'
     Plugin 'rizzatti/dash.vim'
     "Plugin 'Valloric/YouCompleteMe'
@@ -73,7 +74,7 @@ try
     "Plugin 'DrawIt'
     Plugin 'godlygeek/tabular'
     "Plugin 'terryma/vim-expand-region'
-    
+
     call vundle#end()
 catch /E117:/
     " Vundle is not available
@@ -93,6 +94,9 @@ let g:airline_symbols.branch='⑂'
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_javascript_checkers = ['jsxhint']
+
+let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_frontmatter=1 " Highlight YAML frontmatter as used by Jekyll
 
 """ Conceal
 set conceallevel=2 concealcursor=nc
@@ -202,6 +206,9 @@ vmap <leader>d "+d
 vmap <leader>D "+D
 vmap <leader>p "+p
 vmap <leader>P "+P
+
+nmap <leader>yy "+yy
+nmap <leader>Y "+Y
 nmap <leader>p "+p
 nmap <leader>P "+P
 
